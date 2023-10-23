@@ -1,28 +1,34 @@
 ---
 layout: layouts/home.njk
-eleventyNavigation:
-  key: Home
-  order: 1
-numberOfLatestPostsToShow: 3
+numberOfLatestPostsToShow: 10
 ---
-{% set postsCount = collections.posts | length %}
-{% set latestPostsCount = postsCount | min(numberOfLatestPostsToShow) %}
-<h1>Latest {{ latestPostsCount }} Post{% if latestPostsCount != 1 %}s{% endif %}</h1>
 
-{% set postslist = collections.posts | head(-1 * numberOfLatestPostsToShow) %}
-{% set postslistCounter = postsCount %}
-{% include "postslist.njk" %}
+<h1>Hello, I'm Sanjeev</h1>
+<div class="intro">
+	{% image "../public/img/sanjeev.jpeg", metadata.title %}
+	<p>
+		{{ metadata.description }}
+	</p>
+</div>
 
-{% set morePosts = postsCount - numberOfLatestPostsToShow %}
-{% if morePosts > 0 %}
-<p>{{ morePosts }} more post{% if morePosts != 1 %}s{% endif %} can be found in <a href="/blog/">the archive</a>.</p>
-{% endif %}
+<div class="social-links">
+	<a href="https://www.linkedin.com/in/sanjeevsubedi/" target="_blank">
+		{% image "../public/img/li.png", metadata.title %}
+	</a>
+</div>
 
-{# List every content page in the project #}
-{#
+<h2>Recent Posts</h2>
+{% set posts = collections.posts | limit(numberOfLatestPostsToShow) %}
 <ul>
-	{%- for entry in collections.all %}
-	<li><a href="{{ entry.url }}"><code>{{ entry.url }}</code></a></li>
+	{%- for post in posts %}
+	<li>
+		<a href="{{ post.url }}">{{ post.data.title }}</a>
+	</li>
 	{%- endfor %}
 </ul>
-#}
+
+<script>
+	const desc = {{ metadata.description | dump | safe }};
+	const formattedDesc = desc.replace('eBay', '<strong>eBay</strong>');
+	document.querySelector('.intro p').innerHTML = formattedDesc;
+</script>

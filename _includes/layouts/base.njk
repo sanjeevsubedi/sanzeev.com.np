@@ -1,14 +1,25 @@
 <!doctype html>
 <html lang="{{ metadata.language }}">
 	<head>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-CHBF15W2W1"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'G-CHBF15W2W1');
+		</script>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>{{ title or metadata.title }}</title>
+		<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
 		<meta name="description" content="{{ description or metadata.description }}">
 
 		{#- Atom and JSON feeds included by default #}
 		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}">
 		<link rel="alternate" href="/feed/feed.json" type="application/json" title="{{ metadata.title }}">
+		<link rel="preload" href="/fonts/barlow-regular.ttf" as="font" crossorigin />
+		<link rel="preload" href="/fonts/barlow-medium.ttf" as="font" crossorigin />
+		<link rel="preload" href="/fonts/barlow-bold.ttf" as="font" crossorigin />
 
 		{#- Uncomment this if you’d like folks to know that you used Eleventy to build your site!  #}
 		{#- <meta name="generator" content="{{ eleventy.generator }}"> #}
@@ -24,6 +35,7 @@
 		{#- Add an arbitrary string to the bundle #}
 		{%- css %}* { box-sizing: border-box; }{% endcss %}
 		{#- Add the contents of a file to the bundle #}
+		{%- css %}{% include "public/css/reset.css" %}{% endcss %}
 		{%- css %}{% include "public/css/index.css" %}{% endcss %}
 		{#- Or add from node_modules #}
 		{# {%- css %}{% include "node_modules/prismjs/themes/prism-okaidia.css" %}{% endcss %} #}
@@ -34,27 +46,31 @@
 		{#- <link rel="stylesheet" href="{% getBundleFileUrl "css" %}"> #}
 	</head>
 	<body>
-		<a href="#skip" class="visually-hidden">Skip to main content</a>
-
 		<header>
-			<a href="/" class="home-link">{{ metadata.title }}</a>
-
-			{#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
-			<nav>
-				<h2 class="visually-hidden">Top level navigation menu</h2>
-				<ul class="nav">
-				{%- for entry in collections.all | eleventyNavigation %}
-					<li class="nav-item"><a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page"{% endif %}>{{ entry.title }}</a></li>
-				{%- endfor %}
-				</ul>
-			</nav>
+			<div class="container">
+				{#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
+				<nav>
+					<a href="/" class="home-link">
+						<span class="lg-logo">{{ metadata.logo }}</span>
+						<span class="sm-logo">{{ metadata.smallLogo }}</span></a>
+					<ul class="nav">
+					{%- for entry in collections.all | eleventyNavigation %}
+						<li class="nav-item"><a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page"{% endif %}>{{ entry.title }}</a></li>
+					{%- endfor %}
+					</ul>
+				</nav>
+			</div>
 		</header>
 
-		<main id="skip">
-			{{ content | safe }}
+		<main>
+			<div class="container">
+				{{ content | safe }}
+			</div>
 		</main>
 
-		<footer></footer>
+		<footer>
+			© Copyright 2023 Sanjeev Subedi
+		</footer>
 
 		<!-- Current page: {{ page.url | htmlBaseUrl }} -->
 	</body>
