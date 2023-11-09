@@ -1,7 +1,6 @@
 import { defineConfig } from "tinacms";
 
-// Your hosting provider likely exposes this as an environment variable
-const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main";
+const branch = "main";
 
 export default defineConfig({
 	branch,
@@ -9,7 +8,7 @@ export default defineConfig({
 	token: "37c7edc846a16da993fb7d1afa42a4a37c8d7504",
 
 	build: {
-		outputFolder: "admin",
+		outputFolder: "sophie",
 		publicFolder: "public",
 	},
 	media: {
@@ -31,6 +30,25 @@ export default defineConfig({
 						label: "Title",
 						isTitle: true,
 						required: true,
+					},
+					{
+						type: "string",
+						name: "description",
+						label: "Description",
+						required: true,
+					},
+					{
+						type: "datetime",
+						name: "date",
+						label: "Date",
+						required: true,
+					},
+					{
+						type: "string",
+						name: "tags",
+						label: "Tags",
+						required: true,
+						list: true,
 					},
 					{
 						type: "rich-text",

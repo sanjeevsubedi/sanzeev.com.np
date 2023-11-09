@@ -7,7 +7,7 @@ tags:
     - font loading
 ---
 
-How to apply preloading, DNS prefetch strategy and font-display property of CSS to improve the loading speed of a web application by optimizing the web fonts loading and rendering process?
+{{ description }}
 
 {% image "font-loading.png", title %}
 

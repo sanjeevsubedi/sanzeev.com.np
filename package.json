@@ -2,8 +2,8 @@
 	"name": "sanzeev.com.np",
 	"version": "1.0.0",
 	"scripts": {
-		"build": "npx @11ty/eleventy",
-		"start": "npx @11ty/eleventy --serve --quiet",
+		"build": "tinacms build && npx @11ty/eleventy",
+		"start": "tinacms dev -c 'npx @11ty/eleventy --serve --quiet'",
 		"debug": "DEBUG=Eleventy* npx @11ty/eleventy",
 		"debugstart": "DEBUG=Eleventy* npx @11ty/eleventy --serve --quiet",
 		"benchmark": "DEBUG=Eleventy:Benchmark* npx @11ty/eleventy"
