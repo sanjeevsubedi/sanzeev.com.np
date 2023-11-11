@@ -27,9 +27,10 @@ layout: layouts/base.njk
 
 	{{ content | safe }}
 
-	{%- if collections.posts %} {%- set previousPost = collections.posts |
+	{# {%- if collections.posts %} {%- set previousPost = collections.posts |
 	getPreviousCollectionItem %} {%- set nextPost = collections.posts |
-	getNextCollectionItem %} {# {%- if nextPost or previousPost %}
+	getNextCollectionItem %} {%- if nextPost or previousPost %}
+
 	<ul class="links-nextprev">
 		{%- if previousPost %}
 		<li>
@@ -42,5 +43,16 @@ layout: layouts/base.njk
 		</li>
 		{% endif %}
 	</ul>
-	{%- endif %} #} {%- endif %}
+	{%- endif %} {%- endif %} #}
 </div>
+
+<h2>Comments</h2>
+
+<script
+	src="https://utteranc.es/client.js"
+	repo="sanjeevsubedi/sanzeev.com.np"
+	issue-term="title"
+	theme="boxy-light"
+	crossorigin="anonymous"
+	async
+></script>

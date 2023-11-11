@@ -388,6 +388,12 @@ a[href].header-anchor:visited {
 	margin-left: -5px;
 }
 
+/* comments */
+.utterances {
+	max-width: 100%;
+	margin: var(--spacing-relative-7) 0;
+}
+
 @media screen and (max-width: 500px) {
 	.sm-logo {
 		display: block;
