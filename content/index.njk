@@ -3,30 +3,26 @@ layout: layouts/home.njk
 numberOfLatestPostsToShow: 10
 ---
 
-<h1>Hello, I'm Sanjeev</h1>
-<div class="intro">
-	{% image "../public/img/sanjeev.jpeg", metadata.title %}
-	<p>
-		{{ metadata.description }}
-	</p>
+<div class="recent-posts">
+	<h1>Hello, I'm Sanjeev</h1>
+	<div class="intro">
+		{% image "../public/img/sanjeev.jpeg", metadata.title %}
+		<p>
+			{{ metadata.description }}
+		</p>
+	</div>
+
+	<div class="social-links">
+		<a href="https://www.linkedin.com/in/sanjeevsubedi/" target="_blank">
+			{% image "../public/img/li.png", metadata.title %}
+		</a>
+	</div>
+
+	<h2>Recent Posts</h2>
+	{% set postslist = collections.posts | limit(numberOfLatestPostsToShow) %}
+	{% include "postslist.njk" %}
+	<a href="/blog" class="view-more">View all posts &gt;&gt;</a>
 </div>
-
-<div class="social-links">
-	<a href="https://www.linkedin.com/in/sanjeevsubedi/" target="_blank">
-		{% image "../public/img/li.png", metadata.title %}
-	</a>
-</div>
-
-<h2>Recent Posts</h2>
-{% set posts = collections.posts | limit(numberOfLatestPostsToShow) %}
-<ul>
-	{%- for post in posts %}
-	<li>
-		<a href="{{ post.url }}">{{ post.data.title }}</a>
-	</li>
-	{%- endfor %}
-</ul>
-
 <script>
 	const desc = {{ metadata.description | dump | safe }};
 	const formattedDesc = desc.replace('eBay', '<strong>eBay</strong>');

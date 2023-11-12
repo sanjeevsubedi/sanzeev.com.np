@@ -6,25 +6,8 @@ layout: layouts/base.njk
 "node_modules/prismjs/themes/prism.css" %}{% endcss %}
 <div class="post">
 	<h1>{{ title }}</h1>
-
-	<ul class="post-metadata">
-		<li>
-			<span class="reading-time-stat"
-				>{{ content | readingTime }} read</span
-			>
-			<time datetime="{{ page.date | htmlDateString }}">{{
-				page.date | readableDate
-			}}</time>
-		</li>
-		{%- for tag in tags | filterTagList %} {%- set tagUrl %}/tags/{{
-			tag | slugify
-		}}/{% endset %}
-		<li>
-			<a href="{{ tagUrl }}" class="post-tag">#{{ tag }}</a>
-		</li>
-		{%- endfor %}
-	</ul>
-
+	{%- from '../../components/post-metadata.njk' import postMetaData %}
+	{{ postMetaData(page, content, tags) }}
 	{{ content | safe }}
 
 	{# {%- if collections.posts %} {%- set previousPost = collections.posts |
