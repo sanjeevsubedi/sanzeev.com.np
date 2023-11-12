@@ -74,6 +74,8 @@ html {
 	--grey-3: #ddd;
 	--grey-4: #f9f9f9;
 	--blue-1: #1d90f5;
+	--success-color: #008000;
+	--error-color: #bc0606;
 }
 
 * {
@@ -283,6 +285,41 @@ img {
 	height: auto;
 }
 
+form {
+	display: flex;
+	flex-direction: column;
+}
+
+form input,
+form textarea {
+	padding: var(--spacing-relative-2) var(--spacing-relative-2);
+	border-radius: 5px;
+	font-size: var(--font-size-small);
+	border: 1px solid var(--grey-3);
+	width: 100%;
+	font-family: inherit;
+}
+
+form textarea {
+	min-height: 200px;
+}
+
+form .form-group {
+	margin-top: var(--spacing-relative-3);
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: 0;
+}
+
 .container {
 	max-width: 1000px;
 	width: 100%;
@@ -398,6 +435,27 @@ a[href].header-anchor:visited {
 span.copy-code {
 	position: relative;
 	display: block;
+}
+
+/** contact */
+#my-form-status {
+	font-size: var(--font-size-small);
+	font-weight: var(--font-weight-body-bold);
+}
+#my-form-status .success {
+	border: 1px solid var(--success-color);
+	color: var(--success-color);
+}
+
+#my-form-status .error {
+	border: 1px solid var(--error-color);
+	color: var(--error-color);
+}
+
+#my-form-status div {
+	padding: var(--spacing-relative-3);
+	display: flex;
+	flex-direction: column;
 }
 
 span.copy-code button {
