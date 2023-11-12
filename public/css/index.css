@@ -394,6 +394,26 @@ a[href].header-anchor:visited {
 	margin: var(--spacing-relative-7) 0;
 }
 
+/* code copy */
+span.copy-code {
+	position: relative;
+	display: block;
+}
+
+span.copy-code button {
+	position: absolute;
+	top: var(--spacing--1);
+	right: var(--spacing--1);
+	font-size: var(--font-size-x-small);
+	padding: var(--spacing-relative-1) var(--spacing-relative-2);
+	background-color: var(--grey-2);
+}
+
+span.copy-code button:hover {
+	cursor: pointer;
+	background-color: var(--black-color);
+}
+
 @media screen and (max-width: 500px) {
 	.sm-logo {
 		display: block;
