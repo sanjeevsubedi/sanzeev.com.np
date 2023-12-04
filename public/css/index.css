@@ -184,7 +184,8 @@ time {
 	color: var(--tertiary-color);
 }
 
-figcaption {
+figcaption,
+.caption {
 	text-align: center;
 	font-size: var(--font-size-small);
 	color: var(--tertiary-color);
@@ -319,6 +320,10 @@ form .form-group {
 	clip: rect(0, 0, 0, 0);
 	white-space: nowrap;
 	border-width: 0;
+}
+
+.left {
+	text-align: left;
 }
 
 .container {
