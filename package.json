@@ -2,11 +2,12 @@
 	"name": "sanzeev.com.np",
 	"version": "1.0.0",
 	"scripts": {
-		"build": "tinacms build && npx @11ty/eleventy",
+		"build": "npm run clean && tinacms build && npx @11ty/eleventy",
 		"start": "tinacms dev -c 'npx @11ty/eleventy --serve --quiet'",
 		"debug": "DEBUG=Eleventy* npx @11ty/eleventy",
 		"debugstart": "DEBUG=Eleventy* npx @11ty/eleventy --serve --quiet",
-		"benchmark": "DEBUG=Eleventy:Benchmark* npx @11ty/eleventy"
+		"benchmark": "DEBUG=Eleventy:Benchmark* npx @11ty/eleventy",
+		"clean": "rm -rf _site"
 	},
 	"repository": {
 		"type": "git",
