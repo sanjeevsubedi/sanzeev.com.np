@@ -10,6 +10,7 @@ const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
 const pluginDrafts = require("./eleventy.config.drafts.js");
 const pluginImages = require("./eleventy.config.images.js");
 const pluginReadingTime = require("eleventy-plugin-reading-time");
+const pluginVideos = require("./eleventy.config.video.js");
 
 module.exports = function (eleventyConfig) {
 	// Copy the contents of the `public` folder to the output folder
@@ -29,6 +30,7 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.addPlugin(pluginDrafts);
 	eleventyConfig.addPlugin(pluginImages);
 	eleventyConfig.addPlugin(pluginReadingTime);
+	eleventyConfig.addPlugin(pluginVideos);
 
 	// Official plugins
 	eleventyConfig.addPlugin(pluginRss);
