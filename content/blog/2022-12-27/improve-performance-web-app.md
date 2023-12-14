@@ -1,6 +1,7 @@
 ---
 title: Top 7 ways to improve the performance of web apps
 description: In this article, we will be discussing about various ways to boost the performance of web apps which ultimately provides high-quality user experience to the end users.
+seoDescription: Various ways to boost the performance of web apps to provide high-quality user experience to the end users.
 date: 2022-12-27
 tags:
     - performance

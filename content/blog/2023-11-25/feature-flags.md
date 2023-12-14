@@ -1,6 +1,7 @@
 ---
 title: Feature Flags
 description: In this article, I will discuss feature flags, its advantages, disadvantages and demonstrate sample code using openFeature javaScript client library.
+seoDescription: Feature flags with its advantages, disadvantages and sample code using openFeature javaScript client library.
 date: 2023-11-25
 tags:
     - velocity

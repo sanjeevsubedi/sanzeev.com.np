@@ -1,6 +1,7 @@
 ---
 title: Top five features of Github Copilot that every software developer should know
 description: In this article, I will discuss github copilot and its top 5 features that every software developer should know.
+seoDescription: Github copilot and its top 5 features that every software developer should know.
 date: 2023-12-07
 tags:
     - velocity

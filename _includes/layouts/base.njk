@@ -12,7 +12,17 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>{{ title or metadata.title }}</title>
 		<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
-		<meta name="description" content="{{ description or metadata.description }}">
+		<link href="{{ metadata.url + page.url  }}" rel="canonical">
+		<meta name="description" content="{{ seoDescription or metadata.description }}">
+		<meta name="author" content="Sanjeev Subedi">
+
+		<meta property="og:locale" content="en_US">
+		<meta property="og:site_name" content="{{ metadata.url }}">
+		<meta property="og:type" content="article">
+		<meta property="og:title" content="{{ title or metadata.title }}">
+		<meta property="og:description" content="{{ seoDescription or metadata.description }}">
+		<meta property="og:url" content="{{ metadata.url + page.url }}">
+
 
 		{#- Atom and JSON feeds included by default #}
 		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}">
@@ -20,9 +30,6 @@
 		<link rel="preload" href="/fonts/barlow-regular.ttf" as="font" crossorigin />
 		<link rel="preload" href="/fonts/barlow-medium.ttf" as="font" crossorigin />
 		<link rel="preload" href="/fonts/barlow-bold.ttf" as="font" crossorigin />
-
-		{#- Uncomment this if you’d like folks to know that you used Eleventy to build your site!  #}
-		{#- <meta name="generator" content="{{ eleventy.generator }}"> #}
 
 		{#-
 		CSS bundles are provided via the `eleventy-plugin-bundle` plugin:
@@ -98,6 +105,16 @@
 					});
 				}
 			});
+
+			// // Set canonical URL
+			// const metaDataUrl =  `{{ metadata.url }}`;
+			// const pageUrl = `{{ page.url }}`;
+			// // home page vs other pages url logic
+			// const url = pageUrl.split('/').length === 2 ? '' : pageUrl;
+			// if(!url) {
+			// 	console.log('sss')
+			// 	document.querySelector('link[rel="canonical"]').setAttribute('href', metaDataUrl + url);
+			// }
 		</script>
 
 		<!-- Current page: {{ page.url | htmlBaseUrl }} -->

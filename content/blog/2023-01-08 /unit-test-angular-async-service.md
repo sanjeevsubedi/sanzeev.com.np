@@ -1,6 +1,7 @@
 ---
 title: Writing unit tests for asynchronous Angular Service methods
 description: How to test angular services consisting of observable, promise, setTimeout () and delay () ?
+seoDescription: How to test angular services consisting of observable, promise, setTimeout () and delay () ?
 date: 2023-01-08
 tags:
     - angular

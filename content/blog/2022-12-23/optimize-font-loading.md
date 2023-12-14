@@ -1,6 +1,7 @@
 ---
 title: Optimize fonts loading and rendering on web application
 description: How to apply preloading, DNS prefetch strategy and font-display property of CSS to improve the loading speed of a web application by optimizing the web fonts loading and rendering process?
+seoDescription: Apply preloading, DNS prefetch strategy and font-display property of CSS to improve the loading speed of a web application.
 date: 2022-12-23
 tags:
     - performance
