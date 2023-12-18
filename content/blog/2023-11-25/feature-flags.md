@@ -35,21 +35,21 @@ if (showBannerFeatureFlag) {
 
 ## What are the advantages of feature flags?
 
-**1. Decouple feature rollout and deployment**
+### 1. Decouple feature rollout and deployment
 
 Feature flags decouple deployment from feature release and promote progressive delivery (canary release).
 Once the feature flag is integrated, we can continue to push experimental or unfinished feature code but these need to be hidden using the feature flag. Once the feature is ready, we can easily switch the feature on without deployment.
 
 > Rollout of a feature can be controlled from an isolated feature flag management system without deployment of the source code.
 
-**2. Test features in production with confidence**
+### 2. Test features in production with confidence
 
 This is very powerful because nothing is better than testing product features in an actual production environment.
 Features can be turned on to the subset of **internal users** to test in production without affecting other users. This helps to understand the impact of the update before releasing the feature to all users.
 
 If there are issues while testing, we can turn off the flag, and once everything looks good, we can enable the feature flag again.
 
-**3. Release features to targeted audience**
+### 3. Release features to targeted audience
 
 Feature flags are very useful for feature **experimentation**.
 We can create targeting rules based upon different criteria. Following are some of the popular contextual information.
@@ -81,15 +81,15 @@ Likewise, we can release the YELLOW button to the audience with the following co
 
 Further, with the permutation of complex rules, we can achieve advanced audience targeting.
 
-**4. Improves the velocity by releasing features in small batches**
+### 4. Improves the velocity by releasing features in small batches
 
 Feature flag has promoted **trunk based** development. It is a practice where developers merge small frequent updates/PRs to the core trunk or main branch. There is no separate 'release' branch which is created to release the feature at some point in the future. Developers can continue to build a new feature by turning the feature flag off and deploying to master at any time even before a feature is completed. It also prevents merge conflicts/merge hell caused by the state long-lived branches. Since the PR is small, it is easier to review too.
 
-**5. Reduce risk on high traffic area**
+### 5. Reduce risk on high traffic area
 
 Since the controlled testing can be performed on a targeted audience, it reduces the risk of affecting all users on high traffic areas and promotes quick, safe and high quality releases.
 
-**6. Flexible rollout**
+### 6. Flexible rollout
 
 Since feature flags management is decoupled from the feature codebase, anyone who has authority to release the feature can do it from the feature flag management tool anytime they want. There is no need for a developer to release the feature. Product managers can release the feature in absence of a developer. Feature flag management tool is very easy to use and similar to CMS where we simply turn on and off a feature with the intuitive user interface.
 
@@ -130,7 +130,7 @@ if (showBanner) {
 
 Github link: [https://github.com/sanjeevsubedi/feature-flags](https://github.com/sanjeevsubedi/feature-flags)
 
-> Note: In the above example, feature variant is of _boolean_ type, but it can be _string_, _number_ or an _object_ too. When the variant type changes, we also need to change the evaluation method to _getStringValue_, _getNumberValue_ or _getObjectValue_ respectively.
+> Note: In the above example, feature variant is of **boolean** type, but it can be **string**, **number** or an **object** too. When the variant type changes, we also need to change the evaluation method to **getStringValue**, **getNumberValue** or **getObjectValue** respectively.
 
 ## What are the costs of a feature flag?
 

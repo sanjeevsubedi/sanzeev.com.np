@@ -1,7 +1,7 @@
 ---
-title: Top five features of Github Copilot that every software developer should know
-description: In this article, I will discuss github copilot and its top 5 features that every software developer should know.
-seoDescription: Github copilot and its top 5 features that every software developer should know.
+title: Top features of Github Copilot that every software developer should know
+description: In this article, I will discuss github copilot and its top six features that every software developer should know.
+seoDescription: Github copilot and its top six features that every software developer should know.
 date: 2023-12-07
 tags:
     - velocity
@@ -30,13 +30,13 @@ tags:
 
 Video examples presented in this blog post are based on the VS code editor and use the official GitHub Copilot extension with GitHub Copilot enabled in the settings.
 
-**1. Build new features**
+### 1. Build new features
 
 We can think of creating a new module, component, class or function. As an example, I will be creating a few REST API endpoints using express in node.js.
 
 {% video "github-copilot-build-features.mp4", "Example: create REST API endpoints using express in node.js" %}
 
-**2. Generate code from comments**
+### 2. Generate code from comments
 
 Four Principles (4S) of prompt engineering is of paramount importance to generate relevant and accurate code from comments.
 Effective prompts should follow these core principles.
@@ -50,28 +50,28 @@ In the following video, I will be generating a few utility functions from commen
 
 {% video "github-copilot-code-from-comment.mp4", "Example: create utility functions from comments" %}
 
-**3.Generate Docs**
+### 3.Generate Docs
 
 Github copilot can generate relevant documentation by analyzing the source code, right alongside the code itself.
 This is very useful for developers to understand the code better.
 
 {% video "github-copilot-doc-from-code.mp4", "Example: generate document from code" %}
 
-**4. Explain code**
+### 4. Explain code
 
 Github copilot can explain code in plain english. This is very useful for junior developers to understand code better.
 Even senior developers can use this feature to explain code to their peers.
 
 {% video "github-copilot-explain-code.mp4", "Example: explain code" %}
 
-**4. Generate Tests**
+### 5. Generate Tests
 
 We can generate tests for our code. This saves a lot of time and developers can focus on other important tasks.
 Even though the generated tests are not perfect, it is still a good starting point for developers to write tests.
 
 {% video "github-copilot-test-from-code.mp4", "Example: generate unit tests from code" %}
 
-**5. Optimize code**
+### 6. Optimize code
 
 Github copilot can optimize code by fixing code smells, security issues with proper refactoring.
 This is very useful for developers to improve code quality.

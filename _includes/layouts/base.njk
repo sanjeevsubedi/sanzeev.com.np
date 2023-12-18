@@ -13,14 +13,14 @@
 		<title>{{ title or metadata.title }}</title>
 		<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
 		<link href="{{ metadata.url + page.url  }}" rel="canonical">
-		<meta name="description" content="{{ seoDescription or metadata.description }}">
+		<meta name="description" content="{{ seoDescription or metadata.seoDescription }}">
 		<meta name="author" content="Sanjeev Subedi">
 
 		<meta property="og:locale" content="en_US">
 		<meta property="og:site_name" content="{{ metadata.url }}">
 		<meta property="og:type" content="article">
 		<meta property="og:title" content="{{ title or metadata.title }}">
-		<meta property="og:description" content="{{ seoDescription or metadata.description }}">
+		<meta property="og:description" content="{{ seoDescription or metadata.seoDescription }}">
 		<meta property="og:url" content="{{ metadata.url + page.url }}">
 
 

@@ -167,7 +167,8 @@ th {
 }
 
 strong {
-	font-family: var(--font-family-bold);
+	font-family: var(--font-family-medium);
+	font-weight: var(--font-weight-body-medium);
 }
 
 footer {
