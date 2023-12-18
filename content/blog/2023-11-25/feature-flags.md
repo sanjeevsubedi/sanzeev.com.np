@@ -20,7 +20,7 @@ tags:
 
 -   These act as a **gatekeeper** to your feature.
 
-> At a glance, feature flags look like just a simple _conditional check_ which wraps the feature, but it becomes very powerful when we use contextual information to determine its values which we call as **targeting** or **audience aware** feature flags.
+> At a glance, feature flags look like just a simple **conditional check** which wraps the feature, but it becomes very powerful when we use contextual information to determine its values which we call as **targeting** or **audience aware** feature flags.
 
 ```ts
 // 'showBannerFeatureFlag' can consist of permutation of contextual data to derive its value.
