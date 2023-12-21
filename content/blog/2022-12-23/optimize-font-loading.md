@@ -5,7 +5,7 @@ seoDescription: Apply preloading, DNS prefetch strategy and font-display propert
 date: 2022-12-23
 tags:
     - performance
-    - font loading
+    - fonts
 ---
 
 {{ description }}

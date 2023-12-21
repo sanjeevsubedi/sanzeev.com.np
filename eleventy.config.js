@@ -41,6 +41,16 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
 	eleventyConfig.addPlugin(pluginBundle);
 
+	// temp fix for generating description metadata for tags page
+	// TODO: remove this once eleventyComputed is fixed
+	eleventyConfig.addGlobalData("eleventyComputed.seoDescription", () => {
+		return (data) => {
+			return data.page.fileSlug === "tags"
+				? `Posts tagged with - ${data.tag}`
+				: data.seoDescription;
+		};
+	});
+
 	// Filters
 	eleventyConfig.addFilter("limit", (array, limit) => {
 		return array.slice(0, limit);
