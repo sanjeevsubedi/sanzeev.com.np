@@ -1,7 +1,7 @@
 ---
 title: Writing unit tests for asynchronous Angular Service methods
 description: How to test angular services consisting of observable, promise, setTimeout () and delay () ?
-seoDescription: How to test angular services consisting of observable, promise, setTimeout () and delay () ?
+seoDescription: Test asynchronous angular services consisting of observable, promise, setTimeout () and delay () with jasmine/karma using fakeAsync, tick, flush, flushMicrotasks and done
 date: 2023-01-08
 tags:
     - angular

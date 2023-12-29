@@ -1,7 +1,7 @@
 ---
 title: Top features of Github Copilot that every software developer should know
 description: In this article, I will discuss github copilot and its top six features that every software developer should know.
-seoDescription: Github copilot and its top six features that every software developer should know.
+seoDescription: Github copilot and its top features that every software developer should know such as build new features, generate code from comments, generate docs, explain code, generate tests, and optimize code.
 date: 2023-12-07
 tags:
     - velocity

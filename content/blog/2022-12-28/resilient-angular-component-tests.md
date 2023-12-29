@@ -1,7 +1,7 @@
 ---
 title: How to make Angular component Test resilient and refactor friendly?
 description: In this article, I will be discussing two strategies to make the Angular component test resilient and refactor friendly.
-seoDescription: Strategies to make the Angular component test resilient and refactor friendly.
+seoDescription: Ways to make the Angular component test resilient and refactor friendly without relying on the internal state of a component and using resilient selectors.
 date: 2022-12-28
 tags:
     - angular

@@ -1,7 +1,7 @@
 ---
 title: How to debug JavaScript code?
 description: In this blog post, we will explore and learn different ways to debug javaScript code with examples.
-seoDescription: Learn how to effectively debug JavaScript code with examples
+seoDescription: Learn how to effectively debug JavaScript code with examples using console, debugger, chrome DevTools, IDE debugger, and logging platforms
 date: 2023-05-01
 tags:
     - javaScript

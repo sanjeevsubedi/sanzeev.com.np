@@ -1,7 +1,7 @@
 ---
 title: SOLID principles in JavaScript
 description: In this blog post, we will explore each of the SOLID principles with JavaScript examples using **function () constructor**  and **prototype methods**. You can consider these as class and class methods respectively.
-seoDescription: How to implement solid principles using javaScript?
+seoDescription: Learn how to implement solid principles using javaScript with examples on single responsibility principle, open-closed principle, liskov substitution principle, interface segregation principle and dependency inversion principle.
 date: 2017-10-05
 tags:
     - OOP
