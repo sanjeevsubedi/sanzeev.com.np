@@ -25,9 +25,9 @@ The more you debug, the more you will learn and the better you will become at de
 
 ## 2. Using console
 
-> It's ok to use console.log () or alert () to debug your code.
+> It's ok to use `console.log ()` or `alert ()` to debug your code.
 
-**Console.log ()** or even **alert ()** can be used to verify whether a given line of code has been executed or not. There is no shame or harm using these simple techniques to debug your code. The console object has tons of useful methods that can be used to debug your code. Some of my favorites are **console.log ()**, **console.table ()**, **console.trace ()**, **console.dir ()** and these work in both browser and node environments.
+`console.log ()` or even `alert ()` can be used to verify whether a given line of code has been executed or not. There is no shame or harm using these simple techniques to debug your code. The console object has tons of useful methods that can be used to debug your code. Some of my favorites are `console.log ()`, `console.table ()`, `console.trace ()`, `console.dir ()` and these work in both browser and node environments.
 
 ### Code with issue:
 
@@ -73,11 +73,11 @@ Order 2
 Order 1
 ```
 
--   When we run the modified **getPosts ()** function, we can see that the order of the **console.log ()** is different from the order of the code execution.
+-   When we run the modified `getPosts ()` function, we can see that the order of the `console.log ()` is different from the order of the code execution.
 
--   This is because the **fetch ()** method is asynchronous and the code wrapped inside the **then ()** method is executed only after the **fetch ()** method is completed successfully.
+-   This is because the `fetch ()` method is asynchronous and the code wrapped inside the `then ()` method is executed only after the `fetch ()` method is completed successfully.
 
-### Now, we have found the issue, so we can fix it by returning the **fetch ()** method inside the **getPosts ()** function.
+### Now, we have found the issue, so we can fix it by returning the `fetch ()` method inside the `getPosts ()` function.
 
 ```js
 const getPosts = () => {
@@ -102,15 +102,15 @@ Order 2
 
 Note: [{}, {}, ...] represent the response from the API call.
 
-We could have used **alert ()** instead of **console.log ()** to debug the code. However, it is only supported in browsers and not in the node environment.
+We could have used `alert ()` instead of `console.log ()` to debug the code. However, it is only supported in browsers and not in the node environment.
 
 ## 3. Using debugger statement
 
-The **debugger** statement sets a breakpoint in your code in the **browser** debugger or **IDE** debugger.
+The `debugger` statement sets a breakpoint in your code in the **browser** debugger or **IDE** debugger.
 If your environment supports it and is active, execution of the code will pause at the debugger statement and from there you can inspect and do further bug investigation.
 This is supported in all major browsers and IDE such as VS Code. Furthermore, it is supported in **Node** as well.
 
-If we need to debug the code using debugger, we can do it by removing the **console.log ()** statements with **debugger** statement as follows:
+If we need to debug the code using debugger, we can do it by removing the `console.log ()` statements with `debugger` statement as follows:
 
 ```js
 const getPosts = () => {

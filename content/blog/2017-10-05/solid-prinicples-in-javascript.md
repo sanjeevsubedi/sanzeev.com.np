@@ -50,7 +50,7 @@ Hospital.prototype.exportPatientData = function (patient) {};
 Hospital.prototype.sendPatientNotification = function (patient) {};
 ```
 
-One can argue that all methods defined in the above class are related to the functionality of **Hospital**. But these functions are not cohesive and focused, so they have many reasons to change.
+One can argue that all methods defined in the above class are related to the functionality of `Hospital`. But these functions are not cohesive and focused, so they have many reasons to change.
 
 -   What will happen if the hospital decides to change the format of the exported patient names? (Think about changing the format from PDF to CSV)
 -   What will happen if the hospital decides to change the way it notifies the patient? (Think about changing the notification channel from EMAIL to SMS)
@@ -72,13 +72,13 @@ function Notifier() {}
 Notifier.prototype.sendPatientNotification = function (patient) {};
 ```
 
-I hope we have achieved a better separation of concerns by separating the responsibilities into different classes: **Hospital**, **DataExporter** and **Notifier**. Now, each of these classes have a single reason to change and minimize the effects of change.
+I hope we have achieved a better separation of concerns by separating the responsibilities into different classes: `Hospital`, `DataExporter` and `Notifier`. Now, each of these classes have a single reason to change and minimize the effects of change.
 
 With the above changes,
 
--   **Hospital** class has only one reason to change, which is to add or remove patients.
--   **DataExporter** class has only one reason to change, which is to export patient data.
--   **Notifier** class has only one reason to change, which is to notify patients.
+-   `Hospital` class has only one reason to change, which is to add or remove patients.
+-   `DataExporter` class has only one reason to change, which is to export patient data.
+-   `Notifier` class has only one reason to change, which is to notify patients.
 
 ## 2. Open-Closed Principle (OCP)
 
@@ -164,7 +164,7 @@ hospital.downloadPatientDataAllFormats(patient);
 
 ### What will happen if we need to export data in different formats in the future again?
 
--   We need to modify **downloadPatientDataAllFormats** method to support the new data format. **Correct?**
+-   We need to modify `downloadPatientDataAllFormats` method to support the new data format. **Correct?**
 -   This violates OCP. We are modifying the existing code to support the new feature.
 
 ### After applying OCP
@@ -207,7 +207,7 @@ hospital.downloadPatientDataAllFormats(patient);
 
 > "Subtype should behave like Supertype"
 
-Let's introduce a **DataExporter** class based on the **patient's age** and some **config**. We are only exporting patient data if the patient age is within the defined range.
+Let's introduce a `DataExporter` class based on the **patient's age** and some **config**. We are only exporting patient data if the patient age is within the defined range.
 
 ```js
 // patient class
@@ -249,7 +249,7 @@ const dataExporter = new DataExporter(config);
 dataExporter.exportPatientData(patient);
 ```
 
-Now, let's imagine we want to export patient data based on the **patient nationality**. We may extend the **DataExporter** class to support this new feature by simply changing the **isAllowed** method shown as below:
+Now, let's imagine we want to export patient data based on the **patient nationality**. We may extend the `DataExporter` class to support this new feature by simply changing the `isAllowed` method shown as below:
 
 ```js
 function NationalityDataExporter(config) {
@@ -280,19 +280,19 @@ const canadaDataExporter = new NationalityDataExporter(config);
 canadaDataExporter.exportPatientData(patient);
 ```
 
-But with this change, the derived class, **NationalityDataExporter**, is not semantically equivalent to its base class **DataExporter**.
+But with this change, the derived class, `NationalityDataExporter`, is not semantically equivalent to its base class `DataExporter`.
 This completely changes the semantics of the base class.
 
 > "Liskov's notion of a behavioural subtype defines a notion of substitutability for objects; that is,
 > if **S** is a subtype of **T**, then objects of type **T** in a program may be replaced with objects of type **S** without altering any of the desirable properties of that program (e.g. correctness)." - [Wikipedia](https://en.wikipedia.org/wiki/Liskov_substitution_principle)
 
-In our example, let's assume **T** is **DataExporter** class and **S** is **NationalityDataExporter** class.
+In our example, let's assume **T** is `DataExporter` class and **S** is `NationalityDataExporter` class.
 
 -   **S** is a subtype of **T**.
--   We cannot replace objects of type **T** with objects of type **S**. If we do that, the results would be unpredictable, since the consuming client assumes that a **DataExporter** class works on patient **age**, not on patient **nationality**.
+-   We cannot replace objects of type **T** with objects of type **S**. If we do that, the results would be unpredictable, since the consuming client assumes that a `DataExporter` class works on patient **age**, not on patient **nationality**.
 -   Objects of **T** are not substitutable with objects of **S**.
 
-> **NationalityDataExporter** is **not** a behaviour subtype of **DataExporter**. This violates behavioral subtyping.
+> `NationalityDataExporter` is **not** a behaviour subtype of `DataExporter`. This violates behavioral subtyping.
 
 Lastly, this principle applies only if you are dealing with inheritance.
 
@@ -302,7 +302,7 @@ Lastly, this principle applies only if you are dealing with inheritance.
 
 -   Imagine the hospital administration is considering exporting **doctor's data**.
 -   But they want to export doctor's data only in CSV format and not in XML format.
--   So, let's add a new method on the **DataExporter** which will be used to export **doctor's** data. Let's call this method as **exportDoctorData**.
+-   So, let's add a new method on the `DataExporter` which will be used to export **doctor's** data. Let's call this method as `exportDoctorData`.
 
 ### Before applying ISP
 
@@ -317,12 +317,12 @@ DataExporter.prototype.exportDoctorData = function (doctor) {};
 
 ### What are the implications of the above changes?
 
-Both **CsvDataExporter** and **XmlDataExporter** classes will inherit **exportDoctorData** method by default. But **XmlDataExporter** class should not be exposed to doctor data as per the business requirement. This results in forcing unnecessary dependencies and creates confusion and maintenance issues.
+Both `CsvDataExporter` and `XmlDataExporter` classes will inherit `exportDoctorData` method by default. But `XmlDataExporter` class should not be exposed to doctor data as per the business requirement. This results in forcing unnecessary dependencies and creates confusion and maintenance issues.
 
 ### How to solve this problem?
 
 We can use **mixins** to solve this problem. Mixin is a great way to add functionality to a class without using inheritance.
-In the following example, we have created two mixins called **PatientInterface** and **DoctorInterface**.
+In the following example, we have created two mixins called `PatientInterface` and `DoctorInterface`.
 
 ### After applying ISP
 
@@ -357,7 +357,7 @@ const xmlDataExporter = new XmlDataExporter();
 const csvDataExporter = new CsvDataExporter();
 ```
 
-With the above changes, **XmlDataExporter** class is not inheriting **exportDoctorData** method by default.
+With the above changes, `XmlDataExporter` class is not inheriting `exportDoctorData` method by default.
 
 {% image "interface-segregation-principle.png", 'interface segregation principle in javascript',  null, null, 'Interface segregation principle implemented using mixin in javaScript' %}
 
@@ -385,11 +385,11 @@ Hospital.prototype.sendNotificationToAllPatients = function () {
 };
 ```
 
--   Let's add a new method called **sendNotificationToAllPatients** to the Hospital class.
--   In the above example, the **Hospital** class is tightly coupled with **Notifier** class.
--   When I say tightly coupled, I mean we are instantiating the **Notifier** class inside the **Hospital** class inside the body of **sendNotificationToAllPatients** using **new Notifier ()**.
--   Let's imagine **Notifier** class added some dependencies in its constructor to add new features. In that case, we also need to change the Hospital class since it needs to provide those dependencies to the Notifier class.
--   Internal implementation details of the **Notifier** class are exposed to the **Hospital** class. This also means the Hospital class is dependent on the implementation details of the Notifier class.
+-   Let's add a new method called `sendNotificationToAllPatients` to the Hospital class.
+-   In the above example, the `Hospital` class is tightly coupled with `Notifier` class.
+-   When I say tightly coupled, I mean we are instantiating the `Notifier` class inside the `Hospital` class inside the body of `sendNotificationToAllPatients` using `new Notifier ()`.
+-   Let's imagine `Notifier` class added some dependencies in its constructor to add new features. In that case, we also need to change the Hospital class since it needs to provide those dependencies to the Notifier class.
+-   Internal implementation details of the `Notifier` class are exposed to the `Hospital` class. This also means the Hospital class is dependent on the implementation details of the Notifier class.
 
 ### After applying DIP
 
@@ -414,15 +414,16 @@ Hospital.prototype.sendNotificationToAllPatients = function () {
 const hospital = new Hospital(new Notifier());
 ```
 
--   In the above example, we moved out **new Notifier ()** from the **Hospital** class and injected the **instance** of **Notifier** class as a dependency through the **constructor** of the **Hospital** class from outside of it.
--   This has made **Hospital** class loosely coupled with **Notifier** class. Hospital class is not dependent on the implementation details of Notifier class anymore.
--   **Hospital** class just needs to know that it can call the **sendPatientNotification** method on the **Notifier** instance. This is the very minimal information that the **Hospital** class needs to know about the Notifier class.
--   So, both **Hospital** and **Notifier** classes are dependent on an abstraction which has a single method called **sendPatientNotification**.
--   In javaScript, we don't have interfaces to represent abstractions. So, we can add if/else checks to only call the **sendPatientNotification** method if it is available on the **Notifier** instance and assume this instance is the correct behavioral instance (Duck Typing).
+-   In the above example, we moved out `new Notifier ()` from the `Hospital` class and injected the **instance** of `Notifier` class as a dependency through the **constructor** of the `Hospital` class from outside of it.
+-   This has made `Hospital` class loosely coupled with `Notifier` class. Hospital class is not dependent on the implementation details of Notifier class anymore.
+-   `Hospital` class just needs to know that it can call the `sendPatientNotification` method on the `Notifier` instance. This is the very minimal information that the `Hospital` class needs to know about the Notifier class.
+-   So, both `Hospital` and `Notifier` classes are dependent on an abstraction which has a single method called `sendPatientNotification`.
+-   In javaScript, we don't have interfaces to represent abstractions. So, we can add if/else checks to only call the `sendPatientNotification` method if it is available on the `Notifier` instance and assume this instance is the correct behavioral instance (Duck Typing).
 
 ## Summary
 
 In this blog post, we learned about the SOLID principles in JavaScript. We explored each principle with relevant examples.
+If you have any questions or feedback, please let me know in the comment section below.
 
 ## References
 
