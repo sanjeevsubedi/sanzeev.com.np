@@ -12,7 +12,13 @@
 				}}</code
 				>{% endif %}
 			</h3>
-			<p>{{ post.data.description.replaceAll("*", "") }}</p>
+			<p>
+				{{
+					post.data.description
+						.replaceAll("*", "")
+						.replaceAll("`", "")
+				}}
+			</p>
 		</a>
 	</li>
 	{% endfor %}

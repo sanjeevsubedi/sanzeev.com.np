@@ -1,6 +1,6 @@
 ---
 title: Writing unit tests for asynchronous Angular Service methods
-description: How to test angular services consisting of observable, promise, setTimeout () and delay () ?
+description: How to test angular services consisting of `observable`, `promise`, `setTimeout ()` and `delay ()` ?
 seoDescription: Test asynchronous angular services consisting of observable, promise, setTimeout () and delay () with jasmine/karma using fakeAsync, tick, flush, flushMicrotasks and done
 date: 2023-01-08
 tags:
@@ -16,8 +16,8 @@ tags:
 
 Let’s first go through the following service (user.service.ts)
 
--   It has 1 dependency on _HttpClient_.
--   It has 1 method called _getUsers_ which returns an _observable_ of users modelled by _User_ interface
+-   It has 1 dependency on `HttpClient`.
+-   It has 1 method called `getUsers` which returns an `observable` of users modelled by `User` interface
 
 > Note: There is a misconception that observable is always asynchronous, but this is not true. It can be synchronous too.
 
@@ -55,7 +55,7 @@ Before we dive into the unit testing code, let’s first visualize the things th
 -   Firstly, in order to write unit test for service in test, we first need to **create an instance** of the service class. Then only we can test the methods, properties that are part of this instance.
 -   Secondly, if the service has any dependencies, we need to mock the real dependency with the mocked version of it. The main goal of unit testing is to test the service in test in **isolation**.
 
-> It is very difficult to create the instance of real **dependencies** since those might not be in our control and sometimes it does not make sense to use the real dependencies. For example, in user.service.ts, _getUsers_ method makes the real api call. We don’t want to hit the database while running our unit tests.
+> It is very difficult to create the instance of real **dependencies** since those might not be in our control and sometimes it does not make sense to use the real dependencies. For example, in `user.service.ts`, `getUsers` method makes the real api call. We don’t want to hit the database while running our unit tests.
 
 -   Thirdly, there are 2 major ways to fake the real dependency.
 
@@ -137,7 +137,7 @@ describe("UserService", () => {
 });
 ```
 
-> Note: In the spec above, we are simulating that userService.getUsers() returns a synchronous observable. All the tests got passed.
+> Note: In the spec above, we are simulating that `userService.getUsers ()` returns a synchronous observable. All the tests got passed.
 
 {% image "synchronous-observable-unit-testing.png", "synchronous observable unit testing with jasmine/karma", null, null, "synchronous observable unit testing with jasmine/karma" %}
 
@@ -227,10 +227,10 @@ As per the log below, it can be verified that all of our tests have now passed.
 
 {% image "delay-error.png", 'asynchronous observable unit testing with jasmine/karma' %}
 
-_Solution 2: Using fakeAsync and tick()_
+_Solution 2: Using fakeAsync and tick ()_
 
--   fakeAsync is a special zone that helps to test asynchronous code in a **synchronous** way.
--   tick() method can only be called inside the fakeAsync zone. It **moves forward or advances** the virtual clock by the number of milliseconds passed as an argument or 0 by default.
+-   `fakeAsync` is a special zone that helps to test asynchronous code in a **synchronous** way.
+-   `tick ()` method can only be called inside the fakeAsync zone. It **moves forward or advances** the virtual clock by the number of milliseconds passed as an argument or 0 by default.
 
 ```ts
 it('#getUsers should return observable of  users', fakeAsync(() => {
@@ -263,13 +263,13 @@ it('#getUsers should return observable of  users', fakeAsync(() => {
   }));
 ```
 
-> In the above code, we are simulating the passage of 3000 milliseconds with tick(3000). Also, the log below shows that test execution is synchronous because the order of console.log() is exactly the same as in the code even though there is a delay of 3000 ms. Compare this with the test log of Solution 1 where the order doesn’t match.
+> In the above code, we are simulating the passage of 3000 milliseconds with `tick(3000)`. Also, the log below shows that test execution is synchronous because the order of `console.log ()` is exactly the same as in the code even though there is a delay of 3000 ms. Compare this with the test log of Solution 1 where the order doesn’t match.
 
 {% image "delay-error.png", 'fake async and tick' %}
 
 ## 2. Testing service method returning observable with delay
 
-This is an extension to the scenario of testing service method returning observable with a **delay**.
+This is an extension to the scenario of testing service method returning observable with a `delay`.
 
 _user.service.ts_
 
@@ -300,11 +300,11 @@ export class UserService {
 }
 ```
 
-In this case also, we will get the exact same errors that we saw above, and we can apply the same exact solutions above to fix the issues. Don’t forget to remove the **delay** from the spec file to only have **mockHttpClient.get.and.returnValue(of(mockUsers))** because the **getUsers** function already has the **delay** inside the pipe function. If we want to have delay on both **httpClient.get** and **pipe** method then we need to have **tick(600)** to simulate the time passage of 3000ms for httpClient.get and 3000ms for delay inside pipe function.
+In this case also, we will get the exact same errors that we saw above, and we can apply the same exact solutions above to fix the issues. Don’t forget to remove the **delay** from the spec file to only have `mockHttpClient.get.and.returnValue ( of ( mockUsers ) )` because the `getUsers` function already has the **delay** inside the pipe function. If we want to have delay on both `httpClient.get` and `pipe` method then we need to have `tick (600)` to simulate the time passage of 3000ms for `httpClient.get` and 3000ms for delay inside pipe function.
 
 ## 3. Testing service method returning promise
 
-We have the same service and the same method, but now the _getUsers_ method returns **promise** instead of an observable.
+We have the same service and the same method, but now the `getUsers` method returns **promise** instead of an observable.
 
 _user.service.ts_
 
@@ -333,13 +333,13 @@ export class UserService {
 }
 ```
 
-> Note: res.json () is a method of Body interface, and Response implements Body.
+> Note: `res.json ()` is a method of `Body` interface, and `Response` implements `Body`.
 
 {% image "response.png", "http response", null, null, "Response Interface" %}
 
 {% image "body.png", "http body", null, null, "Body Interface" %}
 
-Since we are using **fetch** method of **window** object, we don’t want to make the real api call. So, we need to mock the fetch method, and we are spying to achieve that.
+Since we are using `fetch` method of `window` object, we don’t want to make the real api call. So, we need to mock the fetch method, and we are spying to achieve that.
 
 > Note: Consider spying as replacing the original method with the mock/ fake version of your own.
 
@@ -385,7 +385,7 @@ it('#getUsers should return promise of users', () => {
 })
 ```
 
-Based upon the above test, all assertions (expect) did not got executed and we can see the error on the following log too. The reason for this is the asynchronous nature of promise. The **callback** that we add on the ‘then’ function (thennable) is added to the **microtask queue** and not executed immediately. So, not everything inside ‘then’ callback will be guaranteed to execute on time set up by your test framework.
+Based upon the above test, all assertions (expect) did not got executed and we can see the error on the following log too. The reason for this is the asynchronous nature of promise. The **callback** that we add on the ‘then’ function (thennable) is added to the **microtask queue** and not executed immediately. So, not everything inside `then` callback will be guaranteed to execute on time set up by your test framework.
 
 > I highly recommend to learn **event loop** in javaScript to learn about how callbacks are stored on different queues and executed with different priorities.
 
@@ -393,7 +393,7 @@ Based upon the above test, all assertions (expect) did not got executed and we c
 
 **How to fix this issue?**
 
-_Solution 1: Using done() method_
+_Solution 1: Using `done ()` method_
 
 This is similar to how we solved for function returning observable. This approach will wait until you call this method or the default time of your testing framework expires.
 
@@ -447,17 +447,17 @@ We can use any of the following 3 solutions to solve the issue.
 
 -   fakeAsync and flushMicrotasks()
 
-    **fakeAsync** runs the asynchronous tests synchronously in a fakeAsync zone and **flushMicrotasks()** clear pending microtasks from microtask queue. In other words ‘flushMicrotasks’ method resolves the pending promises.
+    `fakeAsync` runs the asynchronous tests synchronously in a fakeAsync zone and `flushMicrotasks ()` clear pending microtasks from microtask queue. In other words `flushMicrotasks` method resolves the pending promises.
 
 -   fakeAsync and flush()
 
-    **flush()** flushes any pending microtasks from the microtask queue and simulates the asynchronous passage of time for the timers in the `fakeAsync` zone by draining the **macrotask** queue until it is empty.
+    `flush ()` flushes any pending microtasks from the microtask queue and simulates the asynchronous passage of time for the timers in the `fakeAsync` zone by draining the **macrotask** queue until it is empty.
 
-    > Note: callback passed in setTimeout is stored in macrotask queue whereas callback passed in ‘then’ function of promise is stored in the microtask queue.
+    > Note: callback passed in setTimeout is stored in macrotask queue whereas callback passed in `then` function of promise is stored in the microtask queue.
 
 -   fakeAsync and tick()
 
-    **tick()** flushes any pending **microtasks** from the microtask queue, simulates the asynchronous passage of time for the timers in the `fakeAsync` zone and after that timer callback will be executed.
+    `tick ()` flushes any pending **microtasks** from the microtask queue, simulates the asynchronous passage of time for the timers in the `fakeAsync` zone and after that timer callback will be executed.
 
 > Since all of the 3 above solutions drains the microtasks queue, any method can be used.
 
@@ -514,7 +514,7 @@ All tests are passing now. One thing to observe is that tests are running synchr
 
 ## 4. Testing service method returning promise with setTimeout
 
-This is an extension to the scenario of testing service method returning promise with **setTimeout**.
+This is an extension to the scenario of testing service method returning promise with `setTimeout`.
 
 _user.service.ts_
 
@@ -553,7 +553,7 @@ export class UserService {
 }
 ```
 
-In this scenario, **flushMicrotasks()** will not work because _setTimeout_ is not a **microtask** but rather it is a macrotask which can only be flushed using either **tick()** or **flush()**. In addition, these methods will first resolve the promise (flush the microtask queue) and then fast forward the timer with the number of milliseconds passed as the arguments.
+In this scenario, `flushMicrotasks ()` will not work because `setTimeout` is not a **microtask** but rather it is a macrotask which can only be flushed using either `tick ()` or `flush ()`. In addition, these methods will first resolve the promise (flush the microtask queue) and then fast forward the timer with the number of milliseconds passed as the arguments.
 
 _user.service.spec.ts_
 
@@ -605,11 +605,11 @@ _user.service.spec.ts_
 
 ## Conclusion
 
-In this post, we learned how to test asynchronous service methods returning promises and observables including setTimeout() and delay() with the help of the following:
+In this post, we learned how to test asynchronous service methods returning promises and observables including setTimeout () and delay () with the help of the following:
 
--   fakeAsync()
--   tick()
--   flush()
--   flushMicrotasks()
--   done()
+-   fakeAsync ()
+-   tick ()
+-   flush ()
+-   flushMicrotasks ()
+-   done ()
 -   jasmine spy

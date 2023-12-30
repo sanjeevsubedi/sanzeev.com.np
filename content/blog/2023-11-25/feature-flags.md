@@ -130,7 +130,7 @@ if (showBanner) {
 
 Github link: [https://github.com/sanjeevsubedi/feature-flags](https://github.com/sanjeevsubedi/feature-flags)
 
-> Note: In the above example, feature variant is of **boolean** type, but it can be **string**, **number** or an **object** too. When the variant type changes, we also need to change the evaluation method to **getStringValue**, **getNumberValue** or **getObjectValue** respectively.
+> Note: In the above example, feature variant is of `boolean` type, but it can be `string`, `number` or an `object` too. When the variant type changes, we also need to change the evaluation method to `getStringValue`, `getNumberValue` or `getObjectValue` respectively.
 
 ## What are the costs of a feature flag?
 

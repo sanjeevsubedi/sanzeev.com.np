@@ -20,7 +20,7 @@ Rendering the web page by **flushing out early and multiple times** will help to
 
 > Before writing progressive rendering code, let's first understand **CSR** and **SSR**
 
-_Client side rendering (CSR)_
+**Client side rendering (CSR)**
 
 ```html
 <!DOCTYPE html>
@@ -41,7 +41,7 @@ _Client side rendering (CSR)_
 
 > Server only sends the javascript bundles to the browser. It will then compile and execute the bundle to create DOM and attach necessary event handlers. We might see performance issues on low-end devices since the parse time will be slow because of slow CPUs.
 
-_Server Side Rendering (SSR)_
+**Server Side Rendering (SSR)**
 
 With this approach, the server will not send any response to the browser until the **full HTML page** is rendered on the server.
 
@@ -98,11 +98,11 @@ html
 
 > Now let's come to **PSR**
 
-_Progressive Rendering (PSR)_
+**Progressive Rendering (PSR)**
 
 This approach overcomes the drawback of server-side rendering and client-side rendering.
 
-The following example doesn’t use any templating language and only uses the **res.write** method to stream HTML data. Also, **in-order flushing strategy** is used where the server defines the order of the chunks that should be flushed. The order of the flushing is head, header, left nav, middle content, right nav and the footer respectively. But it is also possible to do **out-of-order flushing** where the server sends the chunk which resolves first and so on.
+The following example doesn’t use any templating language and only uses the `res.write` method to stream HTML data. Also, **in-order flushing strategy** is used where the server defines the order of the chunks that should be flushed. The order of the flushing is head, header, left nav, middle content, right nav and the footer respectively. But it is also possible to do **out-of-order flushing** where the server sends the chunk which resolves first and so on.
 
 ```javascript
 const express = require("express");
@@ -216,34 +216,34 @@ One of the main drawbacks of single page apps (SPA) is that everything including
 
 ## 3. Cache
 
--   _Etag_
+### Etag
 
-    > How does Etag work?
+> How does Etag work?
 
-    -   Client requests a list of users for the first time.
+-   Client requests a list of users for the first time.
 
-    -   Server generates an **Etag**, string of ASCII characters similar to 33a64df551425fcc55e4d42a148795d9f25f89d4 to represent the requested resource and sends to the client on the response header called ETag: "33a64df551425fcc55e4d42a148795d9f25f89d4"
+-   Server generates an **Etag**, string of ASCII characters similar to 33a64df551425fcc55e4d42a148795d9f25f89d4 to represent the requested resource and sends to the client on the response header called ETag: "33a64df551425fcc55e4d42a148795d9f25f89d4"
 
-    -   Client stores the Etag for future use. If the client requests the same resource, it will send the previously saved Etag under the request header called If-None-Match: "33a64df551425fcc55e4d42a148795d9f25f89d4"
+-   Client stores the Etag for future use. If the client requests the same resource, it will send the previously saved Etag under the request header called If-None-Match: "33a64df551425fcc55e4d42a148795d9f25f89d4"
 
-    -   Server checks the Etag value from the request header. If the response is exactly the same as a previous response, then the Etag generated earlier by the server will also match and therefore it will send a **304** status code without body.
+-   Server checks the Etag value from the request header. If the response is exactly the same as a previous response, then the Etag generated earlier by the server will also match and therefore it will send a **304** status code without body.
 
-    -   If the response has changed, then a **200** status code along with the **body** and **new Etag** representing the **new response** is sent to the client.
+-   If the response has changed, then a **200** status code along with the **body** and **new Etag** representing the **new response** is sent to the client.
 
-    > How did Etag help to improve the performance?
+> How did Etag help to improve the performance?
 
-    -   If the response has not changed then a client can save bandwidth since the server is not required to send the full response, and the client doesn’t have to re-render the page again.
+-   If the response has not changed then a client can save bandwidth since the server is not required to send the full response, and the client doesn’t have to re-render the page again.
 
-    -   This caching mechanism is especially for dynamic resources.
-        {% image "etag.png", "etag", null, null, 'eTag request response header' %}
+-   This caching mechanism is especially for dynamic resources.
+    {% image "etag.png", "etag", null, null, 'eTag request response header' %}
 
--   _HTTP caching (cache-Control)_
+### HTTP caching (cache-Control)
 
-    -   This can be used especially for **static resources** such as fonts, images etc. because these kinds of resources don’t change that often.
+-   This can be used especially for **static resources** such as fonts, images etc. because these kinds of resources don’t change that often.
 
-    -   Resources on the browser can be cached for a predefined duration of time in milliseconds. For example, in the following screenshot, the font is cached for 604800 ms and is served from the memory cache until the expiry of the cache.
+-   Resources on the browser can be cached for a predefined duration of time in milliseconds. For example, in the following screenshot, the font is cached for 604800 ms and is served from the memory cache until the expiry of the cache.
 
-        {% image "http-caching.png", "http caching", null, null, 'HTTP cache in browser'%}
+    {% image "http-caching.png", "http caching", null, null, 'HTTP cache in browser'%}
 
 ## 4. Optimizing the critical rendering path
 
@@ -253,7 +253,7 @@ Critical rendering path (CRP) is the sequential or waterfall steps that the brow
 
 We can use a few techniques to reduce the number and bytes of **critical resources** so that there is less work for the browser to parse and execute.
 
--   Mark non-critical resources with **async** or **defer** to make it non-render blocking.
+-   Mark non-critical resources with `async` or `defer` to make it non-render blocking.
 
 ```html
 <script defer src="https://www.googletagmanager.com/gtag/js?id=TAG_ID"></script>
@@ -264,14 +264,14 @@ We can use a few techniques to reduce the number and bytes of **critical resourc
 ```
 
 -   Develop a strategy to download all critical resources as **early** as possible by using **resource hints** such as preload, prefetch, dns-prefetch.
--   Since CSS is rendering blocking and some CSS are conditional, for example, CSS for printing purposes, specific devices or orientation, we need to mark them using proper **media attributes** so that it becomes conditionally render blocking. In the following example, landscape.css is rendering blocking only for screens which are landscape and non-rendering blocking for all other types of screens. Likewise, print.css is non-rendering blocking for all screen devices.
+-   Since CSS is rendering blocking and some CSS are conditional, for example, CSS for printing purposes, specific devices or orientation, we need to mark them using proper `media` attributes so that it becomes conditionally render blocking. In the following example, `landscape.css` is rendering blocking only for screens which are landscape and non-rendering blocking for all other types of screens. Likewise, print.css is non-rendering blocking for all screen devices.
 
 ```html
 <link href="landscape.css" rel="stylesheet" media="orientation:landscape" />
 <link href="print.css" rel="stylesheet" media="print" />
 ```
 
--   If the CSS file is large and not all of it is required for the first page load, we can probably separate it into inline CSS using the **\<style>** tag as critical and remaining as non-critical on a separate CSS file which will be loaded asynchronously.
+-   If the CSS file is large and not all of it is required for the first page load, we can probably separate it into inline CSS using the `<style>` tag as critical and remaining as non-critical on a separate CSS file which will be loaded asynchronously.
 
 ```html
 <!-- inline css -->
@@ -290,7 +290,7 @@ Since the web worker runs in a **separate thread** from the main thread, we can 
 
 > Web worker makes it possible to run JavaScript in multiple threads and achieve parallelization.
 
-_How can web workers help to improve performance?_
+**How can web workers help to improve performance?**
 
 -   We can isolate long-running and heavy computational work from the main thread and run it on a separate thread.
 -   We can utilize the unused local resources (memory, CPU) of the computer running the browser to run the complex JavaScript code. For example, let’s assume there is an image processing task. Instead of sending the image to the server and processing it, we can run the script on the web worker to process it. This will be fast and also prevents the network roundtrip to the server and saves the server cost.
@@ -335,7 +335,7 @@ onmessage = function (e) {
 // CPU-intensive tasks
 function processLongRunningTask(input) {
 	// result of the heavy computational task such as image processing, running complex algorithms
-	// output can be anything based upon the taks of the task
+	// output can be anything based upon the task of the task
 	const output = "";
 
 	// send the computed output to the main thread
@@ -356,11 +356,11 @@ Serving static resources such as fonts, images, CSS etc. through the CDN will he
 
 It provides instructions to the browsers to **prioritize** the origins or resources that need to be fetched and processed.
 
--   _preload_
+-   **preload**
 
 This loads resources such as js, CSS, font, image etc. that are critical for the **current page** early in the process so that these are readily available during the rendering process. For e.g, we can optimize the font loading and rendering by preloading the font in advance to minimize the risk of FOIT (flash of invisible text).
 
-Learn more here https://medium.com/@sanjeevsubedi/optimize-fonts-loading-and-rendering-on-web-application-260131d6ce7d
+[Learn more: https://sanzeev.com.np/blog/2022-12-23/optimize-font-loading/](https://sanzeev.com.np/blog/2022-12-23/optimize-font-loading/)
 
 ```html
 <link
@@ -371,7 +371,7 @@ Learn more here https://medium.com/@sanjeevsubedi/optimize-fonts-loading-and-ren
 />
 ```
 
--   _prefetch_
+-   **prefetch**
 
 This loads resources which are necessary for **future navigation**. The goal is to improve the performance of the next page that the user might navigate by already caching the required resources.
 
@@ -381,7 +381,7 @@ This loads resources which are necessary for **future navigation**. The goal is 
 <link rel="prefetch" href="/library-needed-for-next-page.js" as="script" />
 ```
 
--   _dns-prefetch_
+-   **dns-prefetch**
 
 This doesn’t fetch any resources but only helps to **set up the connection with the server/origin** early in the process so that when the resources are requested, those will be downloaded faster without latency since all the server connection activities which include DNS lookup, TLS handshake have already been completed.
 
@@ -389,7 +389,7 @@ This doesn’t fetch any resources but only helps to **set up the connection wit
 <link rel="dns-prefetch" href="http://localhost:3000" />
 ```
 
-**References:**
+## References:
 
 -   https://www.facebook.com/notes/10158791368532200/
 -   https://blog.codinghorror.com/the-lost-art-of-progressive-html-rendering/

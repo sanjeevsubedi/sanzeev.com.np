@@ -18,7 +18,7 @@ One of the main disadvantage of testing state is that it is very prone to breaka
 
 I am going to illustrate this with the help of the following code which is taken directly from the official angular website.
 
-_light-switch.component.ts_
+**light-switch.component.ts**
 
 ```ts
 import { Component } from "@angular/core";
@@ -43,7 +43,7 @@ export class LightswitchComponent {
 }
 ```
 
-_light-switch.component.spec.ts_
+**light-switch.component.spec.ts**
 
 ```ts
 import { LightswitchComponent } from "./light-switch.component";
@@ -71,10 +71,10 @@ describe("LightswitchComp", () => {
 
 There are few problems with this approach of testing a component.
 
--   If **isOn** got changed to **toggle**, it will break the test.
--   If **message** got changed to **toggleInfo**, it will break the test.
+-   If `isOn` got changed to `toggle`, it will break the test.
+-   If `message` got changed to `toggleInfo`, it will break the test.
 
-_light-switch.component.ts (modified version)_
+**light-switch.component.ts (modified version)**
 
 ```ts
 import { Component } from "@angular/core";
@@ -99,7 +99,7 @@ export class LightswitchComponent {
 }
 ```
 
-> With the above changes, test will fail eventhough the feature itself is not broken.
+> With the above changes, test will fail even though the feature itself is not broken.
 
 Now, let me ask you few questions.
 
@@ -110,7 +110,7 @@ Now, let me ask you few questions.
 
 I guess the answer is **NO**.
 
-Even though the actual behaviour of the component has not changed at all from the **end user’s perspective**, above changes on the _LightswitchComponent.ts_ will break the test. But it should only break if there are genuine issues such as user not able to see the correct message or toggle button not working as expected which users care about the most.
+Even though the actual behaviour of the component has not changed at all from the **end user’s perspective**, above changes on the `LightswitchComponent.ts` will break the test. But it should only break if there are genuine issues such as user not able to see the correct message or toggle button not working as expected which users care about the most.
 
 ## How to fix this ?
 
@@ -118,7 +118,7 @@ Even though the actual behaviour of the component has not changed at all from th
 
 This is the **modified version** of test for the same component.
 
-_light-switch.component.spec.ts (modified version)_
+**light-switch.component.spec.ts (modified version)**
 
 ```ts
 mport { ComponentFixture, TestBed } from '@angular/core/testing';
@@ -172,7 +172,7 @@ describe('LightswitchComponent', () => {
 In the above modified code, we did the following tasks sequentially.
 
 -   **Render** the LightswitchComponent component.
--   **Get** the _toggle button_ and _message span_ html element using **By.css()** method provided by angular.
+-   **Get** the **toggle button** and **message span** html element using `By.css ()` method provided by angular.
 -   Trigger the **click** event and run change detection to allow DOM binding.
 -   Write **test assertion** to make sure we get proper message when we click the button multiple times (toggle scenario).
 
@@ -190,10 +190,10 @@ const message = fixture.debugElement.query(By.css("span"));
 
 There are still few problems with the way we are traversing the DOM to find the desired selector.
 
--   What will happen if we change **span** to **div** to display the message and apply the exact same styles of span on div? ( This should not impact end user because message will still render in the same old way on the browser.)
+-   What will happen if we change `span` to `div` to display the message and apply the exact same styles of span on `div` ? ( This should not impact end user because message will still render in the same old way on the browser.)
 -   What will happen if we add a **new button** just above the old button ?
 
-_light-switch.component.ts (modified version)_
+**light-switch.component.ts (modified version)**
 
 ```ts
 import { Component } from "@angular/core";
@@ -229,9 +229,9 @@ With either of above changes, component test will **break**.
 
 > Even if we try to use a **class** on the button as follows, the test will still fail.
 >
-> > Note: _primary-button_ class has been added.
+> > Note: `primary-button` class has been added.
 
-_light-switch.component.ts (modified version)_
+**light-switch.component.ts (modified version)**
 
 ```ts
 template: `
@@ -243,14 +243,14 @@ template: `
   `,
 ```
 
-_light-switch.component.spec.ts (modified version)_
+**light-switch.component.spec.ts (modified version)**
 
 ```ts
 // selectors
 const toggleButton = fixture.debugElement.query(By.css(".primary-button"));
 ```
 
-Note: Both **By.css(‘.primary-button’)** or **By.css(‘button)** gives the first found button selector which is a new button that we recently added and not the old button.
+Note: Both `By.css (".primary-button")` or `By.css (button)` gives the first found button selector which is a new button that we recently added and not the old button.
 
 > We could have used a unique id or class on html elements, but these should be primarily used for styling purpose only. If we use them in component test, we are creating a **tight coupling** between the **presentation layer** and the **test**, and this is a seed for a brittle test.
 
@@ -260,12 +260,12 @@ We need to look for some meaningful **unique metadata** on the element we’re t
 
 I have added the following attributes.
 
--   A **name** attribute on the button.
--   A **data-testid** attribute on the div which contains the message.
+-   A `name` attribute on the button.
+-   A `data-testid` attribute on the div which contains the message.
 
-> Note: We can always remove custom data-\* attribute if we don’t it to be part of the production bundle by simply creating an **angular directive**.
+> Note: We can always remove custom `data-*` attribute if we don’t it to be part of the production bundle by simply creating an **angular directive**.
 
-_light-switch.component.ts (modified version)_
+**light-switch.component.ts (modified version)**
 
 ```ts
 @Component({
@@ -280,7 +280,7 @@ _light-switch.component.ts (modified version)_
 })
 ```
 
-_light-switch.component.spec.ts (modified version)_
+**light-switch.component.spec.ts (modified version)**
 
 ```ts
 it('#clicked() should set #message to "is on"', () => {
@@ -314,11 +314,11 @@ it('#clicked() should set #message to "is on"', () => {
 
 **Everything will pass now** 😄
 
-> Note: The only time the **value** of **name** attribute will change is when the product requirement changes. So, _toggle_ will always be _toggle_ and is not coupled with UI/UX in any way (separation of concern).
+> Note: The only time the **value** of `name` attribute will change is when the product requirement changes. So, **toggle** will always be **toggle** and is not coupled with UI/UX in any way (separation of concern).
 
-Furthermore, I think _data-testid_ attribute will also help in the **E2E testing**. But if you need to get rid of it, the following directive does the job.
+Furthermore, I think `data-testid` attribute will also help in the **E2E testing**. But if you need to get rid of it, the following directive does the job.
 
-_data-testid.directive.ts_
+**data-testid.directive.ts**
 
 ```ts
 import { environment } from "./../environments/environment";
@@ -337,9 +337,9 @@ export class DataTestidDirective {
 
 ## Alternative solution to attributes
 
-Instead of using attributes such as _name_, _data-testid_ and so on, another alternative would be to find the selector with the desired **text content**. In general, text content is unique in a component among all the elements contained within it. So, we can create some custom helper function for this as follows:
+Instead of using attributes such as `name`, `data-testid` and so on, another alternative would be to find the selector with the desired **text content**. In general, text content is unique in a component among all the elements contained within it. So, we can create some custom helper function for this as follows:
 
-_test.util.ts_
+**test.util.ts**
 
 ```ts
 function getSelectorByText(
@@ -361,9 +361,9 @@ function getSelectorByText(
 }
 ```
 
-Now, we can use the helper function on our test file as follows. Also, there are no _data-testid_ and _name_ attributes anymore.
+Now, we can use the helper function on our test file as follows. Also, there are no `data-testid` and `name` attributes anymore.
 
-_light-switch.component.ts (modified version)_
+**light-switch.component.ts (modified version)**
 
 ```ts
 @Component({
@@ -378,7 +378,7 @@ _light-switch.component.ts (modified version)_
 })
 ```
 
-_light-switch.component.spec.ts (modified version)_
+**light-switch.component.spec.ts (modified version)**
 
 ```ts
 it('#clicked() should set #message to "is on"', () => {
@@ -412,14 +412,14 @@ it('#clicked() should set #message to "is on"', () => {
 });
 ```
 
-Furthermore, we can also combine both **data-testid** and **getSelectorByText** approach together.
+Furthermore, we can also combine both `data-testid` and `getSelectorByText` approach together.
 
 ## Why is text content better than id, class and element selectors?
 
--   The main reason is that _text content_ does not change that often compared to selectors. Once we setup the mock data for tests, it doesn't change frequently. Don't you agree with me? 😄
--   Tests using _text content_ won't break with the change in class, id and element selectors. For example, in the below component, class name for button can change from _primary-button_ to _secondary-button_ due to the change in requirements (UI). If the class name is referenced in test, it will **fail** because a button with _primary-button_ class does not exist anymore.
+-   The main reason is that **text content** does not change that often compared to selectors. Once we setup the mock data for tests, it doesn't change frequently. Don't you agree with me? 😄
+-   Tests using **text content** won't break with the change in class, id and element selectors. For example, in the below component, class name for button can change from `primary-button` to `secondary-button` due to the change in requirements (UI). If the class name is referenced in test, it will **fail** because a button with `primary-button` class does not exist anymore.
 
-_component before ‘class’ change_
+**component before `class` change**
 
 ```ts
 @Component({
@@ -431,7 +431,7 @@ _component before ‘class’ change_
 })
 ```
 
-_component after ‘class’ change_
+**component after `class` change**
 
 ```ts
 @Component({
@@ -443,7 +443,7 @@ _component after ‘class’ change_
 })
 ```
 
-Imagine if we have relied on the **text content** for button while writing tests, it will not break even with the change in class name. Which one is highly likely to change, _class name_ or _text content_ ?
+Imagine if we have relied on the **text content** for button while writing tests, it will not break even with the change in class name. Which one is highly likely to change, **class name** or **text content** ?
 
 Of course, there are situations when the text content also changes, but in that scenario, we also need to make the corresponding changes on the test. This is expected and the main goal is to make our test less brittle and resilient with minimal changes.
 
@@ -454,5 +454,5 @@ Of course, there are situations when the text content also changes, but in that 
 In this post we learned
 
 -   how to make Angular component test resilient and refactor friendly without relying on the internal state of a component.
--   how to use resilient selectors using unique attributes and getSelectorByText method to select the html element instead of class, ids and HTML tags.
--   how to create a directive to remove the _data-testid_ attribute from the prod environment bundle.
+-   how to use resilient selectors using unique attributes and `getSelectorByText` method to select the html element instead of class, ids and HTML tags.
+-   how to create a directive to remove the `data-testid` attribute from the prod environment bundle.
