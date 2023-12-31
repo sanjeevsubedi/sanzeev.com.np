@@ -2,17 +2,17 @@
 
 @font-face {
 	font-family: barlow-regular;
-	src: url("/fonts/barlow-regular.ttf");
+	src: url("/fonts/Inter-Regular.ttf");
 }
 
 @font-face {
 	font-family: barlow-medium;
-	src: url("/fonts/barlow-medium.ttf");
+	src: url("/fonts/Inter-Medium.ttf");
 }
 
 @font-face {
 	font-family: barlow-bold;
-	src: url("/fonts/barlow-bold.ttf");
+	src: url("/fonts/Inter-SemiBold.ttf");
 }
 
 html {
