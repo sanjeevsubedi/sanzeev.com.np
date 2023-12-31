@@ -425,6 +425,6 @@ const hospital = new Hospital(new Notifier());
 In this blog post, we learned about the SOLID principles in JavaScript. We explored each principle with relevant examples.
 If you have any questions or feedback, please let me know in the comment section below.
 
-## References
+**References**
 
 -   Mastering JavaScript Object-Oriented Programming: Andrea Chiarelli

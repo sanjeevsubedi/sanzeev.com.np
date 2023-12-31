@@ -389,7 +389,7 @@ This doesn’t fetch any resources but only helps to **set up the connection wit
 <link rel="dns-prefetch" href="http://localhost:3000" />
 ```
 
-## References:
+**References**
 
 -   https://www.facebook.com/notes/10158791368532200/
 -   https://blog.codinghorror.com/the-lost-art-of-progressive-html-rendering/
