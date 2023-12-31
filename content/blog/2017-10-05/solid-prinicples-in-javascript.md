@@ -194,7 +194,7 @@ hospital.downloadPatientDataAllFormats(patient);
 ```
 
 -   With the above changes, we have achieved the extension without modifying the existing code.
--   If there is a new requirement to support a new data format, we can just create an instance of the new data exporter type and register it with the hospital from outside of the hospital class.
+-   If there is a new requirement to support a new data format, we can just create an instance of the new data exporter type and register it with the `Hospital` class from outside of the `Hospital` class.
 
 ### Can we predict everything about the future and design the class/abstraction?
 
