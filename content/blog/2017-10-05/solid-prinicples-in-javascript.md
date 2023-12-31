@@ -385,11 +385,11 @@ Hospital.prototype.sendNotificationToAllPatients = function () {
 };
 ```
 
--   Let's add a new method called `sendNotificationToAllPatients` to the Hospital class.
+-   Let's add a new method called `sendNotificationToAllPatients` to the `Hospital` class.
 -   In the above example, the `Hospital` class is tightly coupled with `Notifier` class.
 -   When I say tightly coupled, I mean we are instantiating the `Notifier` class inside the `Hospital` class inside the body of `sendNotificationToAllPatients` using `new Notifier ()`.
--   Let's imagine `Notifier` class added some dependencies in its constructor to add new features. In that case, we also need to change the Hospital class since it needs to provide those dependencies to the Notifier class.
--   Internal implementation details of the `Notifier` class are exposed to the `Hospital` class. This also means the Hospital class is dependent on the implementation details of the Notifier class.
+-   Let's imagine `Notifier` class added some dependencies in its `constructor` to add new features. In that case, we also need to change the `Hospital` class since it needs to provide those dependencies to the `Notifier` class.
+-   Internal implementation details of the `Notifier` class are exposed to the `Hospital` class. This also means the `Hospital` class is dependent on the implementation details of the `Notifier` class.
 
 ### After applying DIP
 
@@ -414,9 +414,9 @@ Hospital.prototype.sendNotificationToAllPatients = function () {
 const hospital = new Hospital(new Notifier());
 ```
 
--   In the above example, we moved out `new Notifier ()` from the `Hospital` class and injected the **instance** of `Notifier` class as a dependency through the **constructor** of the `Hospital` class from outside of it.
--   This has made `Hospital` class loosely coupled with `Notifier` class. Hospital class is not dependent on the implementation details of Notifier class anymore.
--   `Hospital` class just needs to know that it can call the `sendPatientNotification` method on the `Notifier` instance. This is the very minimal information that the `Hospital` class needs to know about the Notifier class.
+-   In the above example, we moved out `new Notifier ()` from the `Hospital` class and injected the **instance** of `Notifier` class as a dependency through the `constructor` of the `Hospital` class from outside of it.
+-   This has made `Hospital` class loosely coupled with `Notifier` class. `Hospital` class is not dependent on the implementation details of `Notifier` class anymore.
+-   `Hospital` class just needs to know that it can call the `sendPatientNotification` method on the `Notifier` instance. This is the very minimal information that the `Hospital` class needs to know about the `Notifier` class.
 -   So, both `Hospital` and `Notifier` classes are dependent on an abstraction which has a single method called `sendPatientNotification`.
 -   In javaScript, we don't have interfaces to represent abstractions. So, we can add if/else checks to only call the `sendPatientNotification` method if it is available on the `Notifier` instance and assume this instance is the correct behavioral instance (Duck Typing).
 
