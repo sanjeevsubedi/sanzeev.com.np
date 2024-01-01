@@ -1,5 +1,6 @@
 /*screen size: 320 - 1920*/
 
+/* fonts are also preloaded in the base template */
 @font-face {
 	font-family: barlow-regular;
 	src: url("/fonts/Inter-Regular.ttf");
@@ -78,6 +79,8 @@ html {
 	--success-color: #008000;
 	--error-color: #bc0606;
 	--code-color: #f2f1f1;
+	--code-success-color: #edf8f0;
+	--code-error-color: #f7dee3;
 }
 
 * {
@@ -117,6 +120,11 @@ h3 {
 p {
 	margin-top: var(--spacing-relative-5);
 	color: var(--black-color);
+}
+
+details {
+	margin-top: var(--spacing-relative-5);
+	color: var(--secondary-color);
 }
 
 figure {
@@ -265,8 +273,16 @@ code[class*="language-"],
 pre[class*="language-"] {
 	font-size: 0.9em;
 	margin-top: var(--spacing-relative-4);
+	background-color: var(--code-color);
 }
 
+pre[class*="language-"] {
+	.token.operator {
+		background-color: transparent;
+	}
+}
+
+/* code highlighter in description, for eg: we can highlight class, methods etc */
 :not(pre) > code {
 	background-color: var(--code-color);
 	padding: var(--spacing-relative-1) var(--spacing-relative-2);
@@ -320,6 +336,43 @@ form textarea {
 
 form .form-group {
 	margin-top: var(--spacing-relative-3);
+}
+
+.good-example,
+.bad-example {
+	pre[class*="language-"] {
+		margin-top: var(--spacing-8);
+	}
+
+	/* TODO: remove hardcoded values */
+	span.copy-code {
+		top: -15px;
+		right: -5px;
+	}
+}
+
+.good-example {
+	pre[class*="language-"],
+	code[class*="language-"] {
+		background-color: var(--code-success-color);
+	}
+
+	.copy-code::before {
+		background-color: var(--success-color);
+		content: "✓";
+	}
+}
+
+.bad-example {
+	pre[class*="language-"],
+	code[class*="language-"] {
+		background-color: var(--code-error-color);
+	}
+
+	.copy-code::before {
+		background-color: var(--error-color);
+		content: "x";
+	}
 }
 
 .sr-only {
@@ -468,6 +521,19 @@ a[href].header-anchor:visited {
 span.copy-code {
 	position: relative;
 	display: block;
+
+	&::before {
+		display: flex;
+		height: 30px;
+		width: 30px;
+		border-radius: 50%;
+		color: var(--white-color);
+		align-items: center;
+		justify-content: center;
+		font-size: var(--font-size-x-small);
+		position: absolute;
+		right: -10px;
+	}
 }
 
 /** contact */
