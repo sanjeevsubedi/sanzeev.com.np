@@ -74,7 +74,11 @@ For example, in the case of **Chrome**, we can observe the following actions:
 
 We can use a preloading strategy to minimize the risk of FOIT. The main idea of preloading is to start the process of downloading the font very early in the process of the critical rendering path, **T1 phase**, in the above diagram. The font will likely be downloaded completely when the process reaches to T2 phase, and the browser can paint the text with custom font right away if there are no other blocking resources. In case, if the font is served from a cross-origin server, href property below should be adjusted accordingly.
 
+<div class="note">
+
 > Note: **crossorigin** must be added on the link tag below even if the font is served from the same origin.
+
+</div>
 
 ```html
 <!DOCTYPE html>
@@ -101,13 +105,21 @@ We can use a preloading strategy to minimize the risk of FOIT. The main idea of 
 </html>
 ```
 
-> Note: If the latency to download the font is very much high even after we start the download process early in the stage, then preloading will also not help and we need to look for another alternative which we will discuss shortly.
+<div class="note">
+
+> **Note**: If the latency to download the font is very much high even after we start the download process early in the stage, then preloading will also not help and we need to look for another alternative which we will discuss shortly.
+
+</div>
 
 ### 2. DNS prefetch
 
 In cases where the **cross-origin server** is used and many fonts need to be downloaded, we can use **DNS prefetch** strategy instead of preloading each font explicitly. The main goal of this approach is to start the **handshaking** process including the DNS resolving process and establishing the connection with the server early in the process so that later in the process of critical rendering path, downloading resources becomes faster since the connection to the server which might include several network roundtrips has already been set up. This also helps to optimize the rendering of other resources such as images, javascript etc if they are served from the same cross-origin server.
 
-> Note: If all the resources are on the same origin server, then this is not useful.
+<div class="note">
+
+> **Note**: If all the resources are on the same origin server, then this is not useful.
+
+</div>
 
 ```html
 <!DOCTYPE html>

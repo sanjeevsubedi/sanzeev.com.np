@@ -76,6 +76,7 @@ html {
 	--grey-4: #f9f9f9;
 	--white-color-2: #fafafa;
 	--blue-1: #1d90f5;
+	--blue-2: #e3f0fb;
 	--success-color: #008000;
 	--error-color: #bc0606;
 	--code-color: #f2f1f1;
@@ -294,7 +295,7 @@ blockquote {
 	margin-top: var(--spacing-relative-4);
 	background-color: var(--grey-1);
 	box-shadow: inset 3px 0 0 0 var(--grey-2);
-	padding: 1em;
+	padding: var(--spacing-relative-4);
 }
 
 blockquote blockquote {
@@ -569,6 +570,31 @@ span.copy-code button {
 span.copy-code button:hover {
 	cursor: pointer;
 	background-color: var(--black-color);
+}
+
+.note {
+	position: relative;
+	&::before {
+		content: "i";
+		display: flex;
+		height: 25px;
+		width: 25px;
+		border-radius: 50%;
+		color: var(--white-color);
+		align-items: center;
+		justify-content: center;
+		font-size: var(--font-size-x-small);
+		position: absolute;
+		left: 10px;
+		top: 25px;
+		background-color: var(--blue-1);
+	}
+
+	blockquote {
+		padding-left: 50px;
+		box-shadow: inset 3px 0 0 0 var(--blue-1);
+		background-color: var(--blue-2);
+	}
 }
 
 @media screen and (max-width: 500px) {
