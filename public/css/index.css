@@ -270,6 +270,7 @@ table th {
 	border: 1px solid var(--grey-3);
 }
 
+pre,
 code[class*="language-"],
 pre[class*="language-"] {
 	font-size: 0.9em;
@@ -281,6 +282,12 @@ pre[class*="language-"] {
 	.token.operator {
 		background-color: transparent;
 	}
+}
+
+/* css to display code output */
+pre {
+	padding: var(--spacing-relative-4);
+	font-size: var(--font-size-small);
 }
 
 /* code highlighter in description, for eg: we can highlight class, methods etc */
@@ -339,17 +346,16 @@ form .form-group {
 	margin-top: var(--spacing-relative-3);
 }
 
-.good-example,
-.bad-example {
-	pre[class*="language-"] {
-		margin-top: var(--spacing-8);
-	}
+.good-example pre[class*="language-"],
+.bad-example pre[class*="language-"] {
+	margin-top: var(--spacing-8);
+}
 
+.good-example span.copy-code,
+.bad-example span.copy-code {
 	/* TODO: remove hardcoded values */
-	span.copy-code {
-		top: -15px;
-		right: -5px;
-	}
+	top: -15px;
+	right: -5px;
 }
 
 .good-example {
@@ -357,11 +363,11 @@ form .form-group {
 	code[class*="language-"] {
 		background-color: var(--code-success-color);
 	}
+}
 
-	.copy-code::before {
-		background-color: var(--success-color);
-		content: "✓";
-	}
+.good-example .copy-code::before {
+	background-color: var(--success-color);
+	content: "✓";
 }
 
 .bad-example {
@@ -369,11 +375,11 @@ form .form-group {
 	code[class*="language-"] {
 		background-color: var(--code-error-color);
 	}
+}
 
-	.copy-code::before {
-		background-color: var(--error-color);
-		content: "x";
-	}
+.bad-example .copy-code::before {
+	background-color: var(--error-color);
+	content: "x";
 }
 
 .sr-only {
@@ -522,19 +528,19 @@ a[href].header-anchor:visited {
 span.copy-code {
 	position: relative;
 	display: block;
+}
 
-	&::before {
-		display: flex;
-		height: 30px;
-		width: 30px;
-		border-radius: 50%;
-		color: var(--white-color);
-		align-items: center;
-		justify-content: center;
-		font-size: var(--font-size-x-small);
-		position: absolute;
-		right: -10px;
-	}
+span.copy-code::before {
+	display: flex;
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+	color: var(--white-color);
+	align-items: center;
+	justify-content: center;
+	font-size: var(--font-size-x-small);
+	position: absolute;
+	right: -10px;
 }
 
 /** contact */
@@ -574,27 +580,28 @@ span.copy-code button:hover {
 
 .note {
 	position: relative;
-	&::before {
-		content: "i";
-		display: flex;
-		height: 25px;
-		width: 25px;
-		border-radius: 50%;
-		color: var(--white-color);
-		align-items: center;
-		justify-content: center;
-		font-size: var(--font-size-x-small);
-		position: absolute;
-		left: 10px;
-		top: 25px;
-		background-color: var(--blue-1);
-	}
+}
 
-	blockquote {
-		padding-left: 50px;
-		box-shadow: inset 3px 0 0 0 var(--blue-1);
-		background-color: var(--blue-2);
-	}
+.note::before {
+	content: "i";
+	display: flex;
+	height: 25px;
+	width: 25px;
+	border-radius: 50%;
+	color: var(--white-color);
+	align-items: center;
+	justify-content: center;
+	font-size: var(--font-size-x-small);
+	position: absolute;
+	left: 10px;
+	top: 25px;
+	background-color: var(--blue-1);
+}
+
+.note blockquote {
+	padding-left: 50px;
+	box-shadow: inset 3px 0 0 0 var(--blue-1);
+	background-color: var(--blue-2);
 }
 
 @media screen and (max-width: 500px) {

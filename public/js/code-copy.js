@@ -1,5 +1,5 @@
 const copyButtonLabel = "copy code";
-const blocks = document.querySelectorAll("pre");
+const blocks = document.querySelectorAll("pre[class*='language-']");
 
 blocks.forEach((block) => {
 	// only add button if browser supports Clipboard API
