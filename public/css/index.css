@@ -279,9 +279,11 @@ pre[class*="language-"] {
 }
 
 pre[class*="language-"] {
-	.token.operator {
-		background-color: transparent;
-	}
+	margin-top: 0;
+}
+
+pre[class*="language-"] .token.operator {
+	background-color: transparent;
 }
 
 /* css to display code output */
@@ -346,23 +348,30 @@ form .form-group {
 	margin-top: var(--spacing-relative-3);
 }
 
+/** code blocks */
+
+.copy-code::before {
+	display: flex;
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+	color: var(--white-color);
+	align-items: center;
+	justify-content: center;
+	font-size: var(--font-size-x-small);
+	position: absolute;
+	right: -10px;
+	top: 15px;
+}
+
 .good-example pre[class*="language-"],
-.bad-example pre[class*="language-"] {
-	margin-top: var(--spacing-8);
+.good-example code[class*="language-"] {
+	background-color: var(--code-success-color);
 }
 
-.good-example span.copy-code,
-.bad-example span.copy-code {
-	/* TODO: remove hardcoded values */
-	top: -15px;
-	right: -5px;
-}
-
-.good-example {
-	pre[class*="language-"],
-	code[class*="language-"] {
-		background-color: var(--code-success-color);
-	}
+.bad-example pre[class*="language-"],
+.bad-example code[class*="language-"] {
+	background-color: var(--code-error-color);
 }
 
 .good-example .copy-code::before {
@@ -370,16 +379,30 @@ form .form-group {
 	content: "✓";
 }
 
-.bad-example {
-	pre[class*="language-"],
-	code[class*="language-"] {
-		background-color: var(--code-error-color);
-	}
-}
-
 .bad-example .copy-code::before {
 	background-color: var(--error-color);
 	content: "x";
+}
+
+/* code copy button */
+span.copy-code {
+	position: relative;
+	display: block;
+	margin-top: var(--spacing-relative-4);
+}
+
+span.copy-code button {
+	margin-top: 0;
+	font-size: var(--font-size-x-small);
+	padding: var(--spacing-relative-1) var(--spacing-relative-2);
+	background-color: var(--grey-2);
+	border-radius: 0;
+	vertical-align: bottom;
+}
+
+span.copy-code button:hover {
+	cursor: pointer;
+	background-color: var(--black-color);
 }
 
 .sr-only {
@@ -425,8 +448,6 @@ a[href].header-anchor,
 a[href].header-anchor:visited {
 	color: transparent;
 }
-
-/* mentorship */
 
 /* blog post */
 .post-metadata {
@@ -524,25 +545,6 @@ a[href].header-anchor:visited {
 	margin: var(--spacing-relative-7) 0;
 }
 
-/* code copy */
-span.copy-code {
-	position: relative;
-	display: block;
-}
-
-span.copy-code::before {
-	display: flex;
-	height: 30px;
-	width: 30px;
-	border-radius: 50%;
-	color: var(--white-color);
-	align-items: center;
-	justify-content: center;
-	font-size: var(--font-size-x-small);
-	position: absolute;
-	right: -10px;
-}
-
 /** contact */
 #my-form-status {
 	font-size: var(--font-size-small);
@@ -564,19 +566,7 @@ span.copy-code::before {
 	flex-direction: column;
 }
 
-span.copy-code button {
-	position: absolute;
-	top: var(--spacing--1);
-	right: var(--spacing--1);
-	font-size: var(--font-size-x-small);
-	padding: var(--spacing-relative-1) var(--spacing-relative-2);
-	background-color: var(--grey-2);
-}
-
-span.copy-code button:hover {
-	cursor: pointer;
-	background-color: var(--black-color);
-}
+/* block to display some notes */
 
 .note {
 	position: relative;

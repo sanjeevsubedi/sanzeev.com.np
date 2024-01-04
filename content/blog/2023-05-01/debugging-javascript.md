@@ -45,7 +45,7 @@ console.log(getPosts());
 
 **Output**
 
-```js
+```
 undefined;
 ```
 
@@ -68,7 +68,7 @@ getPosts();
 
 **Output**
 
-```js
+```
 Order 2
 Order 1
 ```
@@ -94,7 +94,9 @@ getPosts().then((data) => {
 });
 ```
 
-```js
+**Output**
+
+```
 Order 1
 Order 2
 [{}, {}, ...]
