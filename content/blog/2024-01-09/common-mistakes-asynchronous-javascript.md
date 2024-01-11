@@ -10,7 +10,7 @@ tags:
 
 {{ description }}
 
-{% image "common-mistakes-asynchronous-javascript.gif", title %}
+{% image "common-mistakes-asynchronous-javascript.png", title %}
 
 ## 1. Using `forEach` for sequential promise execution
 
