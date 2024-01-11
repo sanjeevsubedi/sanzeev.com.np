@@ -12,6 +12,8 @@ tags:
 
 {% image "common-mistakes-asynchronous-javascript.png", title %}
 
+I have listed some of the common mistakes while writing asynchronous javaScript code as follows:
+
 ## 1. Using `forEach` for sequential promise execution
 
 Given we have a collection of **promises** as follows, we want to loop through each promise and wait for it to resolve before moving on to the next one.
@@ -63,7 +65,7 @@ async function execute() {
 
 </div>
 
-But using `forEach`, all code above will output in the wrong order in the console as follows:
+But using any flavors of `forEach`, all code above will output in the **wrong** order in the console as follows:
 
 ```
 2
@@ -76,6 +78,8 @@ But using `forEach`, all code above will output in the wrong order in the consol
 > **Note:** `forEach` is not designed to work with `async` callbacks. It will not wait for the `async` callback to complete and will move on to the next iteration. This is the reason why we see the output in the console in the **wrong** order.
 
 </div>
+
+**How can we fix this?**
 
 There are many ways to fix this. But we will look at two of them.
 
