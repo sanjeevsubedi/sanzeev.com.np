@@ -26,6 +26,17 @@ module.exports = (eleventyConfig) => {
 				outputDir: path.join(eleventyConfig.dir.output, "img"), // Advanced usage note: `eleventyConfig.dir` works here because we’re using addPlugin.
 			});
 
+			// add og:image on the page
+			const coverImage = metadata.webp?.[0];
+
+			if (
+				coverImage &&
+				coverImage.width === 1200 &&
+				coverImage.height === 627
+			) {
+				this.page.ogImage = coverImage.url;
+			}
+
 			// TODO loading=eager and fetchpriority=high
 			let imageAttributes = {
 				alt,

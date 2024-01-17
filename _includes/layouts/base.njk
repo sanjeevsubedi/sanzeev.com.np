@@ -22,6 +22,7 @@
 		<meta property="og:title" content="{{ title or metadata.title }}">
 		<meta property="og:description" content="{{ seoDescription or metadata.seoDescription }}">
 		<meta property="og:url" content="{{ metadata.url + page.url }}">
+		<meta property="og:image" content="{{ metadata.url + page.ogImage }}">
 
 
 		{#- Atom and JSON feeds included by default #}
