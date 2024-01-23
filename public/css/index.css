@@ -65,7 +65,7 @@ html {
 	--font-weight-body-medium: 600;
 	--font-weight-body-bold: 700;
 	/*colors*/
-	--primary-color: #031b66;
+	--primary-color: #031b66; /*#303846*/
 	--secondary-color: #4040c8;
 	--tertiary-color: #717171;
 	--white-color: #fff;
@@ -82,6 +82,8 @@ html {
 	--code-color: #f2f1f1;
 	--code-success-color: #edf8f0;
 	--code-error-color: #f7dee3;
+	/*radius*/
+	--button-border-radius: 5px;
 }
 
 * {
@@ -150,7 +152,6 @@ em {
 
 iframe {
 	width: 100%;
-	min-height: 80vh;
 }
 
 button {
@@ -158,7 +159,7 @@ button {
 	background: var(--blue-1);
 	padding: var(--spacing-relative-4) var(--spacing-relative-5);
 	color: var(--white-color);
-	border-radius: 5px;
+	border-radius: var(--button-border-radius);
 	cursor: pointer;
 	font-weight: var(--font-weight-body-bold);
 	font-size: 0.7em;
@@ -296,7 +297,7 @@ pre {
 :not(pre) > code {
 	background-color: var(--code-color);
 	padding: var(--spacing-relative-1) var(--spacing-relative-2);
-	border-radius: 5px;
+	border-radius: var(--button-border-radius);
 	font-size: var(--font-size-small);
 }
 
@@ -389,6 +390,7 @@ span.copy-code {
 	position: relative;
 	display: block;
 	margin-top: var(--spacing-relative-4);
+	margin-bottom: var(--spacing--4);
 }
 
 span.copy-code button {
@@ -469,6 +471,45 @@ a[href].header-anchor:visited {
 
 .post div.no-caption {
 	margin-top: var(--spacing-relative-7);
+}
+
+.post .links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	margin-top: var(--spacing-relative-7);
+	padding: 0;
+}
+
+.post .links-nextprev li {
+	list-style: none;
+	flex-basis: 0;
+	flex-grow: 1;
+}
+
+.post .links-nextprev li.prev {
+	padding-right: var(--spacing-relative-7);
+}
+
+.post .links-nextprev li.next {
+	padding-left: var(--spacing-relative-7);
+}
+
+.post .links-nextprev li a {
+	display: flex;
+	flex-direction: column;
+	font-weight: var(--font-weight-body-bold);
+	text-align: center;
+}
+
+.post .links-nextprev li a span {
+	display: flex;
+	background-color: var(--primary-color);
+	color: var(--white-color);
+	border-radius: 10px;
+	padding: var(--spacing-relative-2);
+	align-items: center;
+	justify-content: center;
+	margin-bottom: var(--spacing-relative-2);
 }
 
 /* postlist */

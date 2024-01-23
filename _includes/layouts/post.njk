@@ -10,23 +10,26 @@ layout: layouts/base.njk
 	{{ postMetaData(page, content, tags) }}
 	{{ content | safe }}
 
-	{# {%- if collections.posts %} {%- set previousPost = collections.posts |
+	{%- if collections.posts %} {%- set previousPost = collections.posts |
 	getPreviousCollectionItem %} {%- set nextPost = collections.posts |
 	getNextCollectionItem %} {%- if nextPost or previousPost %}
 
 	<ul class="links-nextprev">
 		{%- if previousPost %}
-		<li>
-			Previous:
-			<a href="{{ previousPost.url }}">{{ previousPost.data.title }}</a>
+		<li class="prev">
+			<a href="{{ previousPost.url }}">
+				<span><< Previous </span> {{ previousPost.data.title }}</a
+			>
 		</li>
 		{% endif %} {%- if nextPost %}
-		<li>
-			Next: <a href="{{ nextPost.url }}">{{ nextPost.data.title }}</a>
+		<li class="next">
+			<a href="{{ nextPost.url }}"
+				><span>Next >></span> {{ nextPost.data.title }}</a
+			>
 		</li>
 		{% endif %}
 	</ul>
-	{%- endif %} {%- endif %} #}
+	{%- endif %} {%- endif %}
 </div>
 
 <h2>Comments</h2>

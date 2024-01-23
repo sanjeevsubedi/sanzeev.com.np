@@ -56,6 +56,11 @@ module.exports = function (eleventyConfig) {
 		return array.slice(0, limit);
 	});
 
+	eleventyConfig.addFilter("truncate", (stringInput, limit = 200) => {
+		const input = stringInput.replaceAll("*", "").replaceAll("`", "");
+		return input.length > limit ? input.substring(0, limit) + "..." : input;
+	});
+
 	eleventyConfig.addFilter("readableDate", (dateObj, format, zone) => {
 		// Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
 		return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(

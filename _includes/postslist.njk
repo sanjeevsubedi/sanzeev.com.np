@@ -13,11 +13,7 @@
 				>{% endif %}
 			</h3>
 			<p>
-				{{
-					post.data.description
-						.replaceAll("*", "")
-						.replaceAll("`", "")
-				}}
+				{{ post.data.description | truncate }}
 			</p>
 		</a>
 	</li>
