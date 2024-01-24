@@ -53,7 +53,7 @@ html {
 	/*fonts*/
 	--font-size-x-small: clamp(0.8rem, 0.753rem + 0.235vw, 0.9rem);
 	--font-size-small: clamp(0.8rem, 0.659rem + 0.706vw, 1.1rem);
-	--font-size-body: clamp(1rem, 0.812rem + 0.941vw, 1.4rem);
+	--font-size-body: clamp(1rem, 0.96rem + 0.2vw, 1.2rem);
 	--font-size-logo: clamp(1.5rem, 1.359rem + 0.706vw, 1.8rem);
 	--font-size-h1: clamp(1.6rem, 1.224rem + 1.882vw, 2.4rem);
 	--font-size-h2: clamp(1.4rem, 1.024rem + 1.882vw, 2.2rem);
@@ -277,6 +277,7 @@ pre[class*="language-"] {
 	font-size: 0.9em;
 	margin-top: var(--spacing-relative-4);
 	background-color: var(--code-color);
+	overflow: auto;
 }
 
 pre[class*="language-"] {
@@ -486,6 +487,11 @@ a[href].header-anchor:visited {
 	flex-grow: 1;
 }
 
+.post .links-nextprev li:hover span {
+	background-color: var(--grey-2);
+	color: var(--white-color);
+}
+
 .post .links-nextprev li.prev {
 	padding-right: var(--spacing-relative-7);
 }
@@ -499,6 +505,11 @@ a[href].header-anchor:visited {
 	flex-direction: column;
 	font-weight: var(--font-weight-body-bold);
 	text-align: center;
+	font-size: var(--font-size-small);
+}
+
+.post .links-nextprev li a:hover {
+	color: var(--grey-2);
 }
 
 .post .links-nextprev li a span {
