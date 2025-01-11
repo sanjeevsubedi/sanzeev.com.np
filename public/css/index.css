@@ -586,6 +586,17 @@ a[href].header-anchor:visited {
 	padding: 0 var(--spacing-relative-2);
 }
 
+.recent-posts .list-container {
+	display: flex;
+}
+
+.recent-posts .vad {
+	margin-top: var(--spacing-relative-4);
+	border: 1px solid var(--grey-1);
+	width: 40%;
+	margin-left: var(--spacing-relative-4);
+}
+
 .view-more {
 	display: flex;
 	margin-top: var(--spacing-relative-5);
@@ -655,5 +666,15 @@ a[href].header-anchor:visited {
 
 	.lg-logo {
 		display: none;
+	}
+
+	.list-container {
+		flex-direction: column;
+	}
+
+	.list-container .vad {
+		width: 100%;
+		margin-left: 0;
+		margin-right: 0;
 	}
 }

@@ -3,28 +3,31 @@ layout: layouts/home.njk
 numberOfLatestPostsToShow: 10
 ---
 
-<div class="recent-posts">
-	<h1>Hello, I'm Sanjeev</h1>
-	<div class="intro">
-		{% image "../public/img/sanjeev.jpeg", metadata.title %}
-		<p>
-			{{ metadata.description }}
-		</p>
-	</div>
-
-	<div class="social-links">
-		<a href="https://www.linkedin.com/in/sanjeevsubedi/" target="_blank">
-			{% image "../public/img/li.png", metadata.title %}
-		</a>
-	</div>
-
-	<h2>Recent Posts</h2>
-	{% set postslist = collections.posts | limit(numberOfLatestPostsToShow) %}
-	{% include "postslist.njk" %}
-	<a href="/blog" class="view-more">View all posts &gt;&gt;</a>
+<h1>Hello, I'm Sanjeev</h1>
+<div class="intro">
+	{% image "../public/img/sanjeev.jpeg", metadata.title %}
+	<p>
+		{{ metadata.description }}
+	</p>
 </div>
-<script>
-	const desc = {{ metadata.description | dump | safe }};
-	const formattedDesc = desc.replace('eBay', '<strong>eBay</strong>');
-	document.querySelector('.intro p').innerHTML = formattedDesc;
-</script>
+
+<div class="social-links">
+	<a href="https://www.linkedin.com/in/sanjeevsubedi/" target="_blank">
+		{% image "../public/img/li.png", metadata.title %}
+	</a>
+</div>
+<div class="recent-posts">
+	<h2>Recent Posts</h2>
+	<div class="list-container">
+		{% set postslist = collections.posts | limit(numberOfLatestPostsToShow)
+		%} {% include "postslist.njk" %} {% import "../components/ads.njk" as
+		side %}{{ side.ads() }}
+	</div>
+	<a href="/blog" class="view-more">View all posts &gt;&gt;</a>
+
+	<script>
+		const desc = {{ metadata.description | dump | safe }};
+		const formattedDesc = desc.replace('eBay', '<strong>eBay</strong>');
+		document.querySelector('.intro p').innerHTML = formattedDesc;
+	</script>
+</div>
